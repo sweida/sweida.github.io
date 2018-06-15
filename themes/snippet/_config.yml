@@ -9,16 +9,16 @@ menu:
   url: /
   # icon: fa-home
 - page: 前端
-  url: /categories/前端/
+  url: /categories/前端
   icon:
 - page: 后端
-  url: /categories/后端/
+  url: /categories/后端
   icon:
 - page: 工具
-  url: /categories/工具/
+  url: /categories/工具
   icon:
 - page: 时间轴
-  url: /archives/
+  url: /archives
   icon:
 
 ## favicon

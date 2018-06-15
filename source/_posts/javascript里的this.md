@@ -1,10 +1,10 @@
 ---
 title: javascript里的this
-date: 2017-08-15 11:37:27
-tags:
-  - JavaScript
 categories: 前端
-
+tags:
+- JavaScript
+abbrlink: 19315
+date: 2017-08-15 11:37:27
 ---
 
 在一个对象中绑定函数，称为这个对象的方法。
