@@ -87,5 +87,5 @@ theme: Snippet
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://${GH_TOKEN}@github.com/sweida/sweida.github.io.git
+  repo: https://github.com/sweida/sweida.github.io.git
   branch: master
