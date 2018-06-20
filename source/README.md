@@ -1,6 +1,6 @@
 # 个人博客
 
-[![Build Status](https://www.travis-ci.org/shenliyang/shenliyang.github.io.svg?branch=dev)](https://travis-ci.org/shenliyang/shenliyang.github.io)
+[![Build Status](https://api.travis-ci.org/sweida/sweida.github.io.svg?branch=dev)](https://www.travis-ci.org/sweida/sweida.github.io)
 
 ## 使用Snippet 主题
 >  Theme by Snippet [主题下载](https://github.com/shenliyang/hexo-theme-snippet)
