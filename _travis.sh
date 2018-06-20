@@ -1,7 +1,7 @@
 #--------------------------------------------
 #!/bin/bash
-# author：shenliyang
-# website：https://github.com/shenliyang
+# author：sweida
+# website：https://github.com/sweida
 # slogan：梦想还是要有的，万一实现了呢。
 #--------------------------------------------
 
@@ -45,8 +45,8 @@ Job NUM  | $TRAVIS_JOB_NUMBER |
 EOF
 
   git init
-  git config user.name "shenliyang"
-  git config user.email ""
+  git config user.name "sweida"
+  git config user.email "weidaxyy@163.com"
   git add .
   git commit -m "Build by Travis CI"
   git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
