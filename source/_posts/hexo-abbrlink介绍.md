@@ -37,7 +37,7 @@ permalink: posts/:abbrlink/
 其中:abbrlink代表连接地址。 posts为你想要使用的地址目录
 
 ### 最终
-用 hexo new xxxx 生成新博文时就会自动在.md里多生成一行
+用 hexo new xxxx 生成新博文时就会自动在.md里多生成一行 (项目需要hexo serve启动)
 > posts: 12345（一串数字）
 
 然后博文地址就变成 xxxx.github.io/posts/12345.html

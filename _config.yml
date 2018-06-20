@@ -15,9 +15,15 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://sweida.github.io/
 root: /
-# permalink: :year/:month/:day/:title/
 permalink: archives/:abbrlink.html
+# permalink: :year/:month/:day/:title/
 permalink_defaults:
+
+# 修改端口号
+server:
+  port: 3300
+  compress: true
+  header: true
 
 # Directory
 source_dir: source
