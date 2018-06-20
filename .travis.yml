@@ -27,7 +27,7 @@ before_script:
   - chmod +x _travis.sh  #授权脚本执行权限
 
 script:
-  - hexo clean && hexo g -d #清除缓存并生成静态文件
+  - hexo clean && hexo g #清除缓存并生成静态文件
   - gulp #执行gulp任务
 
 after_success: #执行成功时(以后扩展功能使用)
