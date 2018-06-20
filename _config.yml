@@ -5,17 +5,18 @@
 # Site
 title: 施伟达's Blog
 subtitle:
-description: 个人技术学习分享博客
-keywords: 技术博客
-author: shiweida
-language:
+description: 个人技术学习分享博客，前端技术分享
+keywords: 技术博客,前端技术
+author: 施伟达
+language: zh-cn
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://sweida.github.io/
 root: /
-permalink: :year/:month/:day/:title/
+# permalink: :year/:month/:day/:title/
+permalink: archives/:abbrlink.html
 permalink_defaults:
 
 # Directory
@@ -27,6 +28,8 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - README.md
+  - 404.html
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -35,10 +38,9 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: true
+post_asset_folder: true # 图片插件
 relative_link: false
 future: true
-highlight_theme: night eighties
 highlight:
   enable: true
   line_number: true

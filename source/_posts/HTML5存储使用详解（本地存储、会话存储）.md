@@ -1,10 +1,10 @@
 ---
 title: HTML5存储使用详解（本地存储、会话存储）
-date: 2018-06-15 11:44:02
 tags:
   - HTML5
 categories: 前端
-id: 2323
+abbrlink: 13671
+date: 2018-06-15 11:44:02
 ---
 
 ### 1，Web存储介绍
