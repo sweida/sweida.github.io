@@ -17,6 +17,9 @@ menu:
 - page: 工具
   url: /categories/工具
   icon:
+- page: Gitbook
+  url: /myGitbook
+  icon:
 - page: 时间轴
   url: /archives
   icon:
