@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-less": "^3.5.0",
     "webpack": "^4.12.0"
   }
 }
