@@ -19,6 +19,8 @@ Grunt是一套前端自动化工具，一个基于nodeJs的命令行工具，最
 2. 合并文件
 3. 简单语法检查
 
+>文章底部附带项目的github地址
+
 ## 安装 CLI
 ```
 npm install -g grunt-cli
@@ -266,6 +268,7 @@ module.exports = function(grunt) {
 上面又引入了一个clean插件，每次构建时候先清除build目录，这样build目录就是我们打包后的要的结果了。目录结构如下：
 ![最后目录](12322/006.png)
 
+## 项目地址： [https://github.com/sweida/grunt-demo](https://github.com/sweida/grunt-demo)
 
 <!-- ### 使用watch插件（真正实现自动化）
 ```
