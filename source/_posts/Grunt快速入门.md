@@ -192,7 +192,8 @@ watch插件配置完成。运行grunt命令，控制台提示watch已经开始�
 useminPrepare用来检测html页面中的脚本块，包括脚本文件的源路径，目的路径，从而更新后续需要使用到的Grunt任务的配置信息，如前面使用的concat，uglify。useminPrepare只是分析文件，获取文件及路径信息，不更新内容。
 
 而usemin则进行文件引用替换，将源文件中的文件块替换为压缩文件。useminPrepare已经帮助我们自动配置了concat，uglify针对的源文件以及目的文件的路径信息,因此就无需再手动配置concat和uglify任务了。配置代码如下
-
+![js引用](12322/008.png)
+注意js需要`<!-- build:css css/App.min.css --><!-- endbuild -->`这样包裹着usemin才能起效
 ```js
 module.exports = function(grunt) {
     grunt.initConfig({
