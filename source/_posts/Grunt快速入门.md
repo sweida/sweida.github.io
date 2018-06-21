@@ -185,7 +185,9 @@ watch插件配置完成。运行grunt命令，控制台提示watch已经开始�
 
 ### 引用替换：grunt-usemin（grunt-contrib-copy，grunt-contrib-clean）
 
-使用上面两个插件合并压缩后，每次都需要手动去html页面中修改引用路径，这并不是我们想要的结果，并且直接在源版本上修改也不利于测试与发布，因此首先我们需要用到grunt-contrib-copy插件，将源代码copy一份，然后在副本上进行压缩合并，这样无论是全部压缩还是部分压缩就比较灵活了，copy之后就可以使用grunt-usemin插件了，usemin是一个多任务插件，它包括两个任务，useminPrepare和usemin。
+前端优化是尽量减少http请求，所以我们需要尽量合并压缩文件，然后调用压缩后的文件，比如多个css文件压缩成一个，多个js文件合并压缩等，grunt-usemin能够自动在html中使用压缩后的文件，达到上面的目的。
+
+因此首先我们需要用到grunt-contrib-copy插件，将源代码copy一份，然后在副本上进行压缩合并，这样无论是全部压缩还是部分压缩就比较灵活了，copy之后就可以使用grunt-usemin插件了，usemin是一个多任务插件，它包括两个任务，useminPrepare和usemin。
 
 useminPrepare用来检测html页面中的脚本块，包括脚本文件的源路径，目的路径，从而更新后续需要使用到的Grunt任务的配置信息，如前面使用的concat，uglify。useminPrepare只是分析文件，获取文件及路径信息，不更新内容。
 
@@ -230,14 +232,13 @@ module.exports = function(grunt) {
     });
     // 告诉grunt 我们将要使用的插件
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-babel');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-usemin');
 
     // 告诉grunt 我们在终端输入grunt时需要做些什么（注意先后顺序）
-    grunt.registerTask('default', ['clean', 'copy', 'useminPrepare', 'concat', 'babel', 'uglify', 'usemin']);
+    grunt.registerTask('default', ['clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'usemin']);
 };
 ```
 
