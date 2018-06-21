@@ -102,7 +102,7 @@ branding: 人生若只如初见
 
 ## 设置banner背景图片
 banner:
-    img: http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner.jpg
+    img: '../../img/banner.jpg'
 
 ## 首页列表底部面板
 homePanel: true
@@ -125,7 +125,7 @@ fontAwesome:
 
 ## 文章过期提醒功能
 warning:
-  days: 300
+  days: 500
   text: '本文于%d天之前发表，文中内容可能已经过时。'
 
 ## 文章内声明
