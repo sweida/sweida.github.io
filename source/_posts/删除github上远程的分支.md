@@ -3,7 +3,7 @@ title: 删除github上远程的分支
 date: 2018-06-15 15:37:56
 categories: 工具
 tags:
-  - git
+  - Git
 comments: true
 abbrlink: 26064
 ---
