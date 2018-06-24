@@ -719,7 +719,7 @@ pre {
   text-align: left;
   padding: 4px 8px 4px 10px;
   border: 1px solid #dadada;
-  vertical-align: top;
+  /* vertical-align: top; */
 }
 .post-content tr:nth-child(even) {
   background-color: #f9f9f9;
