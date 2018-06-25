@@ -20,6 +20,9 @@ menu:
 - page: Gitbook
   url: /myGitbook
   icon:
+- page: vip视频
+  url: /vip
+  icon:
 - page: 时间轴
   url: /archives
   icon:
@@ -56,7 +59,8 @@ jsonContent:
 
 ## 网站公告设置
 notification: |-
-            <p>刚开的博客,谢谢关注^_^ <br/>
+            <p>施伟达，90后金牛座普通青年，毕业于广东一所野鸡大学的电子信息专业。<br/><hr/>
+            从小爱玩电脑，喜欢研究黑科技，遂从事web前端开发。已经单刷过多个副本，目前开始打Boss，致力成为一枚全栈攻城狮。</p>
 
 ## 社交设置
 social:

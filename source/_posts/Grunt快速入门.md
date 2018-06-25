@@ -5,6 +5,7 @@ abbrlink: 12322
 categories: 工具
 tags:
   - Grunt
+comments: true
 img: archives/12322/001.png
 ---
 
