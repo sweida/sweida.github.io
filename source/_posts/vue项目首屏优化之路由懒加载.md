@@ -16,6 +16,8 @@ comments: true
 * 结合这两者，定义一个能够被 Webpack 自动代码分割的异步组件。
 
 ```js
+// 原始
+improt Foo from './Foo'
 // 第一种方法，需要配合babel的syntax-dynamic-import插件使用
 const Foo = () => import('./Foo.vue')
 // 第二种方法
@@ -26,7 +28,7 @@ const Foo = resolve => require(['./Foo.vue'], resolve)
 ```js
 const router = new VueRouter({
   routes: [
-    { path: '/foo', component: Foo }
+    { path: '/Foo', component: Foo }
   ]
 })
 ```
@@ -38,22 +40,22 @@ import Vue from 'vue'
 improt Router from 'vue-router'
 improt Foo from '@/pages/Foo' // 某页面
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
 // 非懒加载
 /* const routes = [
     {
       path: '/',
-      name: 'foo',
-      component: foo
+      name: 'Foo',
+      component: Foo
     }
 ] */
 // 懒加载
 const routes= [
   {
     path: '/',
-    name: 'holly',
-    componet: () => improt('@/pages/Holly') //其实就相当于按需加载
+    name: 'Foo',
+    componet: () => improt('@/pages/Foo') //其实就相当于按需加载
   }
 ]
 
