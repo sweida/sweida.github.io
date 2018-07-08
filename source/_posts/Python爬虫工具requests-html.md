@@ -10,6 +10,9 @@ comments: true
 
 requests 作者 kennethreitz 出了一个新库 requests-html，requests-html 是基于现有的框架 PyQuery、Requests、lxml、beautifulsoup4等库进行了二次封装，作者将Requests设计的简单强大的优点带到了该项目中。
 
+[requests官方中文教程](http://docs.python-requests.org/zh_CN/latest/user/quickstart.html)
+[requests-html官方教程](https://html.python-requests.org)
+
 ### 安装
 ```
 pip install requests-html
@@ -19,6 +22,28 @@ pip install requests-html
 ```python
 from requests_html import HTMLSession
 session = HTMLSession()
+```
+
+### GET和POST请求
+```python
+# GET请求
+url = "http://kaoshi.edu.sina.com.cn/college/scorelist?tab=batch&wl=1&local=2&batch=&syear=2013"
+r = session.get(url)
+r.encoding='utf-8'  # 解决中文乱码问题
+print(r.text)
+# 获取的网页的内容存储到本地
+with open('test.html','wb') as f:
+    f.write(r.content)
+
+# POST请求
+url = 'https://shuju.wdzj.com/plat-info-target.html'
+params = {'wdzjPlatId': 59,'type': 1, 'target1': 1, 'target2': 0}
+r = session.post(url, params=params)
+print(r.text)
+
+###定制请求头
+headers = {'user-agent': 'my-app/0.0.1'}
+r = session.get(url, headers=headers)
 ```
 
 ### 获取页面链接
