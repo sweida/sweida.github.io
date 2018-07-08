@@ -4,7 +4,7 @@ abbrlink: 47067
 date: 2018-06-29 14:25:05
 categories: 后端
 tags:
-  - Python
+  - python
 comments: true
 ---
 
@@ -61,9 +61,9 @@ print(r.html.links)
 t = r.html.absolute_links
 print(t)
 {'http://www.w3school.com.cn/media/index.asp',
-'http://www.w3school.com.cn/glossary/index.asp', 
-'http://www.w3school.com.cn/php/php_ref.asp', 
-'http://www.w3school.com.cn/site/index.asp', 
+'http://www.w3school.com.cn/glossary/index.asp',
+'http://www.w3school.com.cn/php/php_ref.asp',
+'http://www.w3school.com.cn/site/index.asp',
 ...
 'http://www.w3school.com.cn/asp/asp_quiz.asp'}
 ```
