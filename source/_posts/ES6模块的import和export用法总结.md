@@ -23,11 +23,19 @@ export {sex, echo}
 
 ```js
 // boo.js
-// 通过import获取foo.js文件的内部变量，{}括号内的变量来自于foo.js文件export出的变量标识符。
+// 通过import获取foo.js文件的内部变量，需要加{}引用
+// {}括号内的变量来自于foo.js文件export出的变量标识符，可以按需引入
 import {sex, echo} from "./foo.js"
 
 console.log(sex)   // boy
 echo(sex)          // boy
+
+
+// 写法2 (不推荐) 所有模块全部暴露
+import * as test from './foo.js'
+
+console.log(test.sex)   // boy
+test.echo(test.sex)     // boy
 ```
 
 foo.js文件也可以按如下export语法写，但不如上边直观，不太推荐。
