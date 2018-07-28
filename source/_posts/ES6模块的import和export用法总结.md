@@ -1,7 +1,7 @@
 ---
 title: ES6模块的import和export用法总结
 tags:
-  - js
+  - JavaScript
 categories: 前端
 abbrlink: 8964
 date: 2018-07-23 23:12:00
