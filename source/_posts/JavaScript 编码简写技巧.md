@@ -5,8 +5,10 @@ date: 2018-07-29 01:07:34
 tags:
   - JavaScript
 categories: 前端
+img: archives/56432/javascript.jpg 
 ---
 
+![javascript](56432/javascript.jpg)
 ### for 循环简写
 普通写法：
 ```javascript

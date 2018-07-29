@@ -6,8 +6,10 @@ categories: 工具
 tags:
   - vscode
 comments: true
+img: archives/6132/vscode.jpg 
 ---
 
+![vscode](6132/vscode.jpg)
 vscode前端开发的利器，安装上一些好用的插件和修改个人配置文件，更是所向披靡，开发起来快别人几条街。
 下面详细解释vscode的个人配置
 点击左下角的设置按钮 > 设置 > 右边栏的用户设置，修改user setting文件
