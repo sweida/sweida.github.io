@@ -28,3 +28,14 @@ img: archives/47504/logo.png
 下载完成后自动选取php.exe所在目录，然后一直点下一步直到完成
 完成后打开命令行输入 composer，输出下面即成功
 ![composer](47504/composer.png)
+
+### composer更新
+```
+composer global update
+```
+
+### 使用Composer镜像用法
+修改 composer 的全局配置文件，打开命令行窗口输入命令
+```
+composer config -g repo.packagist composer https://packagist.phpcomposer.com
+```
