@@ -8,7 +8,7 @@ tags:
 img: archives/22843/laravel.jpg
 ---
 
-# Laravel 5.6学习笔记
+## Laravel 5.6学习笔记
 要求:
 PHP >= 7.1.3
 
