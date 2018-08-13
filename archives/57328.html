@@ -1,0 +1,338 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Start Here">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://sweida.github.io">
+    <!--SEO-->
+
+<meta name="description" content="个人技术学习分享博客，前端技术分享"/>
+
+
+
+<meta name="keywords" content="技术博客,前端技术"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>ES6使你的代码更简洁 | Start Here</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.png">
+
+    
+
+
+    <link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background:url(../../img/banner.jpg) 0 -470px;background-size:100%;"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='施伟达'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 人生若只如初见 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/前端"><i class="fa "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/后端"><i class="fa "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工具"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/myGitbook"><i class="fa "></i>Gitbook</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/vip"><i class="fa "></i>vip视频</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="ES6使你的代码更简洁">
+            
+	            ES6使你的代码更简洁
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/前端">
+            前端
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/JavaScript" title='JavaScript'>
+                        JavaScript
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/07/29</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="展开操作符"><a href="#展开操作符" class="headerlink" title="展开操作符"></a>展开操作符</h3><p>ES6引入了 <code>...</code> 操作符，它被称为 “展开操作符”。 它有两个主要用途：将数组或对象传播到新的数组或对象中，并将多个参数合并到一个数组中。</p>
+<p>第一个用例是你可能遇到的最多的用例，所以我们先看看。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="keyword">let</span> b = [<span class="number">1</span>, <span class="number">2</span>, ...a, <span class="number">6</span>]</span><br><span class="line"><span class="built_in">console</span>.log(b)</span><br><span class="line"><span class="comment">// [1, 2, 3, 4, 5, 6]</span></span><br></pre></td></tr></table></figure></p>
+<p>这对于将数组中的元素作为一组变量传递给函数时非常有用。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a, b, c</span>) </span>&#123; </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`a=<span class="subst">$&#123;a&#125;</span>, b=<span class="subst">$&#123;b&#125;</span>, c=<span class="subst">$&#123;c&#125;</span>`</span>)</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">let</span> data = [<span class="number">5</span>, <span class="number">15</span>, <span class="number">2</span>]</span><br><span class="line">foo( ...data)  </span><br><span class="line"><span class="comment">// a=5, b=15, c=2</span></span><br></pre></td></tr></table></figure></p>
+<p>它也可以展开对象，将每个键值对输入到新对象中。（对象展开实际上是在提案的第4阶段，并将在 ES2018 中正式推出，目前仅支持 Chrome 60 或更高版本，Firefox 55 或更高版本 ，以及 node 6.4.0 或更高版本）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> car = &#123; <span class="attr">type</span>: <span class="string">'vehicle '</span>, <span class="attr">wheels</span>: <span class="number">4</span>&#125;</span><br><span class="line"><span class="keyword">let</span> fordGt = &#123; <span class="attr">make</span>: <span class="string">'Ford'</span>, ...car, <span class="attr">model</span>: <span class="string">'GT'</span>&#125;</span><br><span class="line"><span class="built_in">console</span>.log(fordGt)  </span><br><span class="line"><span class="comment">// &#123;make: 'Ford', model: 'GT', type: 'vehicle', wheels: 4&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>函数可以使用 rest（剩余）参数语法接受任意数量的参数作为数组。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ArgumentsArray</span>(<span class="params">...theArguments</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(theArguments)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">ArgumentsArray(<span class="string">'hi'</span>, <span class="string">'there'</span>, <span class="string">'bud'</span>)</span><br><span class="line"><span class="comment">// 将打印 ['hi', 'there', 'bud']</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Object-values"><a href="#Object-values" class="headerlink" title="Object.values()"></a>Object.values()</h3><p>返回一个对象属性值的数组。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> icecreamColors = &#123;</span><br><span class="line">    chocolate: <span class="string">'brown'</span>,</span><br><span class="line">    vanilla: <span class="string">'white'</span>,</span><br><span class="line">    strawberry: <span class="string">'red'</span>,</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> colors = <span class="built_in">Object</span>.values(icecreamColors)</span><br><span class="line"><span class="comment">// colors = ["brown", "white", "red"]</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Object-keys"><a href="#Object-keys" class="headerlink" title="Object.keys()"></a>Object.keys()</h3><p>返回一个对象属性名的数组。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> icecreamColors = &#123;</span><br><span class="line">  chocolate: <span class="string">'brown'</span>,</span><br><span class="line">  vanilla: <span class="string">'white'</span>,</span><br><span class="line">  strawberry: <span class="string">'red'</span>,</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> types = <span class="built_in">Object</span>.keys(icecreamColors)</span><br><span class="line"><span class="comment">// types = ["chocolate", "vanilla", "strawberry"]</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Object-entries"><a href="#Object-entries" class="headerlink" title="Object.entries()"></a>Object.entries()</h3><p>创建一个数组，其中包含一个对象的键/值对数组。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> weather = &#123;</span><br><span class="line">  rain: <span class="number">0</span>,</span><br><span class="line">  temperature: <span class="number">24</span>,</span><br><span class="line">  humidity: <span class="number">33</span>,</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> entries = <span class="built_in">Object</span>.entries(weather)</span><br><span class="line"><span class="comment">// entries = [['rain', 0], ['temperature', 24], ['humidity', 33]]</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign()"></a>Object.assign()</h3><p>允许对象组合在一起。不再需要这个方法，因为您可以使用上面说的对象展开语法。与对象展开操作符一样，Object.assign() 也不会执行深层克隆。当谈到深度克隆对象时，Lodash 是你最好的朋友。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> firstObject = &#123;</span><br><span class="line">  firstName: <span class="string">'Robert'</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> secondObject = &#123;</span><br><span class="line">  lastName: <span class="string">'Cooper'</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> combinedObject = <span class="built_in">Object</span>.assign(firstObject, secondObject)</span><br><span class="line"><span class="comment">// combinedObject = &#123; firstName: 'Robert', lastName: 'Cooper' &#125;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="随机排列数组"><a href="#随机排列数组" class="headerlink" title="随机排列数组"></a>随机排列数组</h3><p>使用 <code>Array.sort()</code> 来重新排序元素，比较器中使用 <code>Math.random()</code> 。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> shuffle = <span class="function"><span class="params">arr</span> =&gt;</span> arr.sort(</span><br><span class="line">  () =&gt; <span class="built_in">Math</span>.random() - <span class="number">0.5</span></span><br><span class="line">)</span><br><span class="line"><span class="comment">// shuffle([1,2,3]) -&gt; [2,3,1]</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="数字数组求和"><a href="#数字数组求和" class="headerlink" title="数字数组求和"></a>数字数组求和</h3><p>使用  <code>Array.reduce()</code> 将每个值添加到累加器，并使用0值初始化。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sum = <span class="function"><span class="params">arr</span> =&gt;</span> arr.reduce(</span><br><span class="line">  (acc, val) =&gt; acc + val, <span class="number">0</span></span><br><span class="line">)</span><br><span class="line"><span class="comment">// sum([1,2,3,4]) -&gt; 10</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="数组取样随，机获取数组中的1个元素"><a href="#数组取样随，机获取数组中的1个元素" class="headerlink" title="数组取样随，机获取数组中的1个元素"></a>数组取样随，机获取数组中的1个元素</h3><p>使用  <code>Math.random()</code> 生成一个随机数，乘以 length，并使用 <code>Math.floor()</code> 舍去小数获得到最接近的整数。这个方法也适用于字符串。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sample = <span class="function"><span class="params">arr</span> =&gt;</span> arr[<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * arr.length)]</span><br><span class="line"><span class="comment">// sample([3, 7, 9, 11]) -&gt; 9</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="反转一个字符串"><a href="#反转一个字符串" class="headerlink" title="反转一个字符串"></a>反转一个字符串</h3><p>用数组解构和 <code>Array.reverse()</code> 来反转字符串中字符的顺序。使用 join(‘’)合并字符串。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reverseString = <span class="function"><span class="params">str</span> =&gt;</span> [...str].reverse().join(<span class="string">''</span>)</span><br><span class="line"><span class="comment">// reverseString('foobar') -&gt; 'raboof'</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="在指定的范围内生成一个随机整数"><a href="#在指定的范围内生成一个随机整数" class="headerlink" title="在指定的范围内生成一个随机整数"></a>在指定的范围内生成一个随机整数</h3><p>使用 <code>Math.random()</code> 生成一个随机数并将其映射到所需的范围，使用 <code>Math.floor()</code> 使其成为一个整数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="function">(<span class="params">min, max</span>) =&gt;</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * (max - min + <span class="number">1</span>)) + min</span><br><span class="line">num(<span class="number">0</span>, <span class="number">5</span>) -&gt; <span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="javascript:;">sweida</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/archives/47504.html" class="pre-post btn btn-default" title='PHP安装和PHP包管理器composer安装'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">PHP安装和PHP包管理器composer安装</span>
+        </a>
+    
+    
+        <a href="/archives/56432.html" class="next-post btn btn-default" title='JavaScript 编码简写技巧'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">JavaScript 编码简写技巧</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!-- <script type="text/javascript" src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        owner:"sweida",
+        repo:"sweida.github.io",
+        oauth: {
+          client_id:"9a486808f778b7b4eac8",
+          client_secret:"78226662fa23e0991de5a220a2e2a233f43cae87"
+        },
+        perPage:"10",
+    });
+    gitment.render('comments');
+</script>
+
+<style media="screen">
+.gitment-footer-container{
+  display: none;
+}
+.gitment-comment-main::before {
+  border-right-color: #7EA4CA;
+}
+/* .gitment-comment-main,
+.gitment-editor-main,
+.gitment-editor-header {
+  border: 1px solid #e67e22;
+}
+.gitment-editor-tab.gitment-selected{
+  border: none;
+}
+.gitment-editor-main::before, .gitment-comment-main::before {
+  border-right-color: #e67e22;
+} */
+
+</style>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Rails"><span class="toc-text">什么是Rails</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rails哲学的两种主要指导原则"><span class="toc-text">Rails哲学的两种主要指导原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Ruby"><span class="toc-text">什么是Ruby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为何选择Ruby"><span class="toc-text">为何选择Ruby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rails-优势"><span class="toc-text">Rails 优势:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVC框架简介"><span class="toc-text">MVC框架简介</span></a></li></ol>
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--<a id="toc-btn">
+    <i class="fa fa-bars"></i>
+</a>-->
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>&copy; 2017-2018 <a href="//github.com/sweida" class="copyright-links" target="_blank" rel="nofollow">sweida</a> 强力驱动
+                </span> |
+                <span>
+                  备案：不存在的！
+                    <!-- 由 <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a> 强力驱动 -->
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>

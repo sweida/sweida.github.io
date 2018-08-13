@@ -1,0 +1,332 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Start Here">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://sweida.github.io">
+    <!--SEO-->
+
+<meta name="description" content="个人技术学习分享博客，前端技术分享"/>
+
+
+
+<meta name="keywords" content="技术博客,前端技术"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Python爬虫工具requests-html | Start Here</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.png">
+
+    
+
+
+    <link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background:url(../../img/banner.jpg) 0 -470px;background-size:100%;"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='施伟达'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 人生若只如初见 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/前端"><i class="fa "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/后端"><i class="fa "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工具"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/myGitbook"><i class="fa "></i>Gitbook</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/vip"><i class="fa "></i>vip视频</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Python爬虫工具requests-html">
+            
+	            Python爬虫工具requests-html
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/后端">
+            后端
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/python" title='python'>
+                        python
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/06/29</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>requests 作者 kennethreitz 出了一个新库 requests-html，requests-html 是基于现有的框架 PyQuery、Requests、lxml、beautifulsoup4等库进行了二次封装，作者将Requests设计的简单强大的优点带到了该项目中。</p>
+<p><a href="http://docs.python-requests.org/zh_CN/latest/user/quickstart.html" target="_blank" rel="noopener">requests官方中文教程</a><br><a href="https://html.python-requests.org" target="_blank" rel="noopener">requests-html官方教程</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">install</span> requests-html</span><br></pre></td></tr></table></figure>
+<h3 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> requests_html <span class="keyword">import</span> HTMLSession</span><br><span class="line">session = HTMLSession()</span><br></pre></td></tr></table></figure>
+<h3 id="GET和POST请求"><a href="#GET和POST请求" class="headerlink" title="GET和POST请求"></a>GET和POST请求</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GET请求</span></span><br><span class="line">url = <span class="string">"http://kaoshi.edu.sina.com.cn/college/scorelist?tab=batch&amp;wl=1&amp;local=2&amp;batch=&amp;syear=2013"</span></span><br><span class="line">r = session.get(url)</span><br><span class="line">r.encoding=<span class="string">'utf-8'</span>  <span class="comment"># 解决中文乱码问题</span></span><br><span class="line">print(r.text)</span><br><span class="line"><span class="comment"># 获取的网页的内容存储到本地</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'test.html'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(r.content)</span><br><span class="line"></span><br><span class="line"><span class="comment"># POST请求</span></span><br><span class="line">url = <span class="string">'https://shuju.wdzj.com/plat-info-target.html'</span></span><br><span class="line">params = &#123;<span class="string">'wdzjPlatId'</span>: <span class="number">59</span>,<span class="string">'type'</span>: <span class="number">1</span>, <span class="string">'target1'</span>: <span class="number">1</span>, <span class="string">'target2'</span>: <span class="number">0</span>&#125;</span><br><span class="line">r = session.post(url, params=params)</span><br><span class="line">print(r.text)</span><br><span class="line"></span><br><span class="line"><span class="comment">###定制请求头</span></span><br><span class="line">headers = &#123;<span class="string">'user-agent'</span>: <span class="string">'my-app/0.0.1'</span>&#125;</span><br><span class="line">r = session.get(url, headers=headers)</span><br></pre></td></tr></table></figure>
+<h3 id="获取页面链接"><a href="#获取页面链接" class="headerlink" title="获取页面链接"></a>获取页面链接</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">r = session.get(<span class="string">'http://www.w3school.com.cn'</span>)</span><br><span class="line">print(r.html.links)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出 (太多，中间省略部分)</span></span><br><span class="line">&#123;<span class="string">'http://www.w3ctech.com/'</span>, <span class="string">'/glossary/index.asp'</span>, <span class="string">'/html5/html5_quiz.asp'</span>, <span class="string">'/php/index.asp'</span>, <span class="string">'/asp/index.asp'</span>, <span class="string">'/php/php_ref_date.asp'</span>, <span class="string">'http://wetest.qq.com/?from=links_w3school'</span>, <span class="string">'/asp/asp_ref.asp'</span>, <span class="string">'/tags/index.asp'</span>, <span class="string">'/xmldom/index.asp'</span>, <span class="string">'/example/csse_examples.asp'</span>, <span class="string">'/w.asp'</span>, <span class="string">'/index.html'</span>, <span class="string">'http://weibo.com/w3schoolcomcn'</span>, <span class="string">'/ws.asp'</span>, <span class="string">'/b.asp'</span>, <span class="string">'/cssref/index.asp'</span>, <span class="string">'/jquerymobile/index.asp'</span>,</span><br><span class="line">...</span><br><span class="line"><span class="string">'/xsl/xsl_languages.asp'</span>,</span><br><span class="line"><span class="string">'/example/html_examples.asp'</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取绝对地址</span></span><br><span class="line">t = r.html.absolute_links</span><br><span class="line">print(t)</span><br><span class="line">&#123;<span class="string">'http://www.w3school.com.cn/media/index.asp'</span>,</span><br><span class="line"><span class="string">'http://www.w3school.com.cn/glossary/index.asp'</span>,</span><br><span class="line"><span class="string">'http://www.w3school.com.cn/php/php_ref.asp'</span>,</span><br><span class="line"><span class="string">'http://www.w3school.com.cn/site/index.asp'</span>,</span><br><span class="line">...</span><br><span class="line"><span class="string">'http://www.w3school.com.cn/asp/asp_quiz.asp'</span>&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用JQuery选择器"><a href="#使用JQuery选择器" class="headerlink" title="使用JQuery选择器"></a>使用JQuery选择器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取3cschoool首页左侧的菜单列表  first=True表示找到的第一个‘HTML教程’</span></span><br><span class="line">menuList = r.html.find(<span class="string">'#navsecond &gt; ul'</span>, first=<span class="keyword">True</span>)</span><br><span class="line">print(menuList.text)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">HTML</span><br><span class="line">HTML5</span><br><span class="line">XHTML</span><br><span class="line">CSS</span><br><span class="line">CSS3</span><br><span class="line">TCP/IP</span><br><span class="line"></span><br><span class="line"><span class="comment"># 找出所有菜单的标题和链接</span></span><br><span class="line">menuList = r.html.find(<span class="string">'#navsecond &gt; ul'</span>)</span><br><span class="line"><span class="keyword">for</span> menu <span class="keyword">in</span> menuList:</span><br><span class="line">    print(menu.text)  <span class="comment"># 获得标题</span></span><br><span class="line">    print(menu.absolute_links)  <span class="comment"># 获得链接</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">HTML</span><br><span class="line">HTML5</span><br><span class="line">XHTML</span><br><span class="line">CSS</span><br><span class="line">CSS3</span><br><span class="line">TCP/IP</span><br><span class="line">&#123;<span class="string">'http://www.w3school.com.cn/html5/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/css/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/html/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/css3/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/xhtml/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/tcpip/index.asp'</span>&#125;</span><br><span class="line">JavaScript</span><br><span class="line">HTML DOM</span><br><span class="line">jQuery</span><br><span class="line">jQuery Mobile</span><br><span class="line">AJAX</span><br><span class="line">JSON</span><br><span class="line">DHTML</span><br><span class="line">E4X</span><br><span class="line">WMLScript</span><br><span class="line">&#123;<span class="string">'http://www.w3school.com.cn/jquerymobile/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/js/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/e4x/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/wmlscript/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/jquery/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/htmldom/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/ajax/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/json/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/dhtml/index.asp'</span>&#125;</span><br><span class="line">PHP</span><br><span class="line">SQL</span><br><span class="line">ASP</span><br><span class="line">ADO</span><br><span class="line">VBScript</span><br><span class="line">&#123;<span class="string">'http://www.w3school.com.cn/asp/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/php/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/ado/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/vbscript/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/sql/index.asp'</span>&#125;</span><br><span class="line">XML</span><br><span class="line">DTD</span><br><span class="line">XML DOM</span><br><span class="line">XSL</span><br><span class="line">XSLT</span><br><span class="line">XSL-FO</span><br><span class="line">XPath</span><br><span class="line">XQuery</span><br><span class="line">XLink</span><br><span class="line">XPointer</span><br><span class="line">Schema</span><br><span class="line">XForms</span><br><span class="line">WAP</span><br><span class="line">SVG</span><br><span class="line">&#123;<span class="string">'http://www.w3school.com.cn/schema/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/xquery/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/xml/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/xslfo/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/xlink/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/wap/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/xforms/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/xsl/xsl_languages.asp'</span>, <span class="string">'http://www.w3school.com.cn/dtd/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/xpath/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/svg/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/xmldom/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/xsl/index.asp'</span>&#125;</span><br><span class="line">Web Services</span><br><span class="line">WSDL</span><br><span class="line">SOAP</span><br><span class="line">RSS</span><br><span class="line">RDF</span><br><span class="line">&#123;<span class="string">'http://www.w3school.com.cn/rdf/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/soap/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/webservices/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/rss/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/wsdl/index.asp'</span>&#125;</span><br><span class="line">ASP.NET</span><br><span class="line">Web Pages</span><br><span class="line">Razor</span><br><span class="line">MVC</span><br><span class="line">Web Forms</span><br><span class="line">&#123;<span class="string">'http://www.w3school.com.cn/aspnet/razor_intro.asp'</span>, <span class="string">'http://www.w3school.com.cn/aspnet/mvc_intro.asp'</span>, <span class="string">'http://www.w3school.com.cn/aspnet/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/aspnet/webpages_intro.asp'</span>, <span class="string">'http://www.w3school.com.cn/aspnet/aspnet_intro.asp'</span>&#125;</span><br><span class="line">网站构建</span><br><span class="line">万维网联盟 (W3C)</span><br><span class="line">浏览器信息</span><br><span class="line">网站品质</span><br><span class="line">语义网</span><br><span class="line">职业规划</span><br><span class="line">网站主机</span><br><span class="line">网络媒体</span><br><span class="line">&#123;<span class="string">'http://www.w3school.com.cn/semweb/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/hosting/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/browsers/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/quality/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/site/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/w3c/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/careers/index.asp'</span>, <span class="string">'http://www.w3school.com.cn/media/index.asp'</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取搜索框属性 attrs</span></span><br><span class="line">search = r.html.find(<span class="string">'#searchui &gt; form'</span>, first=<span class="keyword">True</span>)</span><br><span class="line">t = search.attrs</span><br><span class="line">print(t)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">&#123;<span class="string">'method'</span>: <span class="string">'get'</span>, <span class="string">'id'</span>: <span class="string">'searchform'</span>, <span class="string">'action'</span>: <span class="string">'http://www.google.com.hk/search'</span>&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h3><p>代码撸多了，让我们看会妹纸，以美桌网（ <a href="http://www.win4000.com" target="_blank" rel="noopener">www.win4000.com</a> ）为例，打开网站，观察到这是个列表，图片是缩略图，要想保存图片到本地，当然需要高清大图<br><img src="/archives/47067/001.png" alt="缩略图"><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> requests_html <span class="keyword">import</span> HTMLSession</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">session = HTMLSession()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 背景图片地址</span></span><br><span class="line">url = <span class="string">"http://www.win4000.com/wallpaper_2285_0_10_1.html"</span></span><br><span class="line">r = session.get(url)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建bg文件夹</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">'bg'</span>):</span><br><span class="line">    os.mkdir(<span class="string">'bg'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存图片到bg/目录</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_image</span><span class="params">(url, title)</span>:</span></span><br><span class="line">    img_response = requests.get(url)</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'./bg/'</span>+title+<span class="string">'.jpg'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> file:</span><br><span class="line">        file.write(img_response.content)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找页面中图片列表，找到链接，</span></span><br><span class="line"><span class="comment"># 点击链接，访问查看大图，并获取大图地址pic-large</span></span><br><span class="line">items_img = r.html.find(<span class="string">'ul.clearfix &gt; li &gt; a'</span>)</span><br><span class="line"><span class="keyword">for</span> img <span class="keyword">in</span> items_img:</span><br><span class="line">    img_url = img.attrs[<span class="string">'href'</span>]</span><br><span class="line">    <span class="keyword">if</span> <span class="string">"/wallpaper_detail"</span> <span class="keyword">in</span> img_url:</span><br><span class="line">        r = session.get(img_url)          <span class="comment"># 解析图片详情</span></span><br><span class="line">        item_img = r.html.find(<span class="string">'img.pic-large'</span>, first=<span class="keyword">True</span>)</span><br><span class="line">        url = item_img.attrs[<span class="string">'src'</span>]       <span class="comment"># 大图图片地址</span></span><br><span class="line">        title = item_img.attrs[<span class="string">'title'</span>]   <span class="comment"># 图片标题</span></span><br><span class="line">        print(url+title)</span><br><span class="line">        save_image(url, title)</span><br></pre></td></tr></table></figure></p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="javascript:;">sweida</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/archives/26568.html" class="pre-post btn btn-default" title='python之os模块'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">python之os模块</span>
+        </a>
+    
+    
+        <a href="/archives/45699.html" class="next-post btn btn-default" title='Webpack快速入门'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Webpack快速入门</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!-- <script type="text/javascript" src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        owner:"sweida",
+        repo:"sweida.github.io",
+        oauth: {
+          client_id:"9a486808f778b7b4eac8",
+          client_secret:"78226662fa23e0991de5a220a2e2a233f43cae87"
+        },
+        perPage:"10",
+    });
+    gitment.render('comments');
+</script>
+
+<style media="screen">
+.gitment-footer-container{
+  display: none;
+}
+.gitment-comment-main::before {
+  border-right-color: #7EA4CA;
+}
+/* .gitment-comment-main,
+.gitment-editor-main,
+.gitment-editor-header {
+  border: 1px solid #e67e22;
+}
+.gitment-editor-tab.gitment-selected{
+  border: none;
+}
+.gitment-editor-main::before, .gitment-comment-main::before {
+  border-right-color: #e67e22;
+} */
+
+</style>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Rails"><span class="toc-text">什么是Rails</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rails哲学的两种主要指导原则"><span class="toc-text">Rails哲学的两种主要指导原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Ruby"><span class="toc-text">什么是Ruby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为何选择Ruby"><span class="toc-text">为何选择Ruby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rails-优势"><span class="toc-text">Rails 优势:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVC框架简介"><span class="toc-text">MVC框架简介</span></a></li></ol>
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--<a id="toc-btn">
+    <i class="fa fa-bars"></i>
+</a>-->
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>&copy; 2017-2018 <a href="//github.com/sweida" class="copyright-links" target="_blank" rel="nofollow">sweida</a> 强力驱动
+                </span> |
+                <span>
+                  备案：不存在的！
+                    <!-- 由 <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a> 强力驱动 -->
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>

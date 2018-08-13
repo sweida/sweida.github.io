@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Start Here">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://sweida.github.io">
+    <!--SEO-->
+
+<meta name="description" content="个人技术学习分享博客，前端技术分享"/>
+
+
+
+<meta name="keywords" content="技术博客,前端技术"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Gulp快速入门 | Start Here</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.png">
+
+    
+
+
+    <link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background:url(../../img/banner.jpg) 0 -470px;background-size:100%;"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='施伟达'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 人生若只如初见 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/前端"><i class="fa "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/后端"><i class="fa "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工具"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/myGitbook"><i class="fa "></i>Gitbook</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/vip"><i class="fa "></i>vip视频</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Gulp快速入门">
+            
+	            Gulp快速入门
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/工具">
+            工具
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Gulp" title='Gulp'>
+                        Gulp
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/06/22</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p><img src="/archives/23049/001.jpg" alt="gulp"><br>gulp是前端开发过程中对代码进行构建的工具，是自动化项目的构建利器；她不仅能对网站资源进行优化，而且在开发过程中很多重复的任务能够使用正确的工具自动完成；使用她，我们不仅可以很愉快的编写代码，而且大大提高我们的工作效率。</p>
+<p>gulp是基于Nodejs的自动任务运行器， 她能自动化地完成 javascript/sass/less/html/image/css 等文件的的测试、检查、合并、压缩、格式化、浏览器自动刷新、部署文件生成，并监听文件在改动后重复指定的这些步骤。在实现上，她借鉴了Unix操作系统的管道（pipe）思想，前一级的输出，直接变成后一级的输入，使得在操作上非常简单。</p>
+<p>gulp 和 grunt 非常类似，但相比于 grunt 的频繁 IO 操作，gulp 的流操作，能更快地更便捷地完成构建工作。</p>
+<h3 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> glup -g</span><br></pre></td></tr></table></figure>
+<h3 id="生成package-json文件"><a href="#生成package-json文件" class="headerlink" title="生成package.json文件"></a>生成package.json文件</h3><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> init    <span class="comment"># 一路回车</span></span><br></pre></td></tr></table></figure>
+<h3 id="本地安装gulp"><a href="#本地安装gulp" class="headerlink" title="本地安装gulp"></a>本地安装gulp</h3><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install glup --<span class="built_in">save</span>-<span class="built_in">dev</span></span><br></pre></td></tr></table></figure>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 比较常用的插件</span></span><br><span class="line">npm install --save-dev gulp-concat       <span class="comment"># （合并文件）</span></span><br><span class="line">npm install --save-dev gulp-copy         <span class="comment"># （复制文件）</span></span><br><span class="line">npm install --save-dev gulp-clean-css    <span class="comment"># （压缩css）</span></span><br><span class="line">npm install --save-dev gulp-less         <span class="comment"># （编译less文件）</span></span><br><span class="line">npm install --save-dev gulp-htmlmin      <span class="comment"># （压缩html）</span></span><br><span class="line">npm install --save-dev gulp-uglify       <span class="comment"># （压缩js）</span></span><br><span class="line">npm install --save-dev gulp-useref       <span class="comment"># （修改html引用css、js路径）</span></span><br><span class="line">npm install --save-dev gulp-livereload   <span class="comment"># （自动刷新）</span></span><br></pre></td></tr></table></figure>
+<h3 id="打包一个项目的基本配置"><a href="#打包一个项目的基本配置" class="headerlink" title="打包一个项目的基本配置"></a>打包一个项目的基本配置</h3><p>新建gulpfile.js文件（重要），gulpfile.js是gulp项目的配置文件，是位于项目根目录的普通js文件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入工具包 require('node_modules里对应模块')</span></span><br><span class="line"><span class="keyword">var</span> gulp        = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> less        = <span class="built_in">require</span>(<span class="string">'gulp-less'</span>);</span><br><span class="line"><span class="keyword">var</span> htmlmin     = <span class="built_in">require</span>(<span class="string">'gulp-htmlmin'</span>);</span><br><span class="line"><span class="keyword">var</span> cleanCSS    = <span class="built_in">require</span>(<span class="string">'gulp-clean-css'</span>);</span><br><span class="line"><span class="keyword">var</span> uglify      = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>);</span><br><span class="line"><span class="keyword">var</span> concat      = <span class="built_in">require</span>(<span class="string">'gulp-concat'</span>);</span><br><span class="line"><span class="keyword">var</span> useref      = <span class="built_in">require</span>(<span class="string">'gulp-useref'</span>);</span><br><span class="line"><span class="keyword">var</span> copy        = <span class="built_in">require</span>(<span class="string">'gulp-copy'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 压缩html</span></span><br><span class="line">gulp.task(<span class="string">'testHtmlmin'</span>, [<span class="string">'testUseref'</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;  <span class="comment">// 先修改引用路径，再压缩</span></span><br><span class="line">    <span class="keyword">var</span> options = &#123;</span><br><span class="line">        removeComments: <span class="literal">true</span>,                 <span class="comment">//清除HTML注释</span></span><br><span class="line">        collapseWhitespace: <span class="literal">true</span>,             <span class="comment">//压缩HTML</span></span><br><span class="line">        collapseBooleanAttributes: <span class="literal">true</span>,      <span class="comment">//省略布尔属性的值 &lt;input checked="true"/&gt; ==&gt; &lt;input /&gt;</span></span><br><span class="line">        removeEmptyAttributes: <span class="literal">true</span>,          <span class="comment">//删除所有空格作属性值 &lt;input id="" /&gt; ==&gt; &lt;input /&gt;</span></span><br><span class="line">        removeScriptTypeAttributes: <span class="literal">true</span>,     <span class="comment">//删除&lt;script&gt;的type="text/javascript"</span></span><br><span class="line">        removeStyleLinkTypeAttributes: <span class="literal">true</span>,  <span class="comment">//删除&lt;style&gt;和&lt;link&gt;的type="text/css"</span></span><br><span class="line">        minifyJS: <span class="literal">true</span>,                       <span class="comment">//压缩页面JS</span></span><br><span class="line">        minifyCSS: <span class="literal">true</span>                       <span class="comment">//压缩页面CSS</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> gulp.src(<span class="string">'dist/*.html'</span>)</span><br><span class="line">        .pipe(htmlmin(options))</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 复制图片</span></span><br><span class="line">gulp.task(<span class="string">'copy'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.src(<span class="string">'src/images/**/*'</span>)</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist/images'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译less</span></span><br><span class="line">gulp.task(<span class="string">'testLess'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.src(<span class="string">'src/less/*.less'</span>)  <span class="comment">//该任务针对的文件</span></span><br><span class="line">        .pipe(less())                   <span class="comment">//该任务调用的模块</span></span><br><span class="line">        .pipe(gulp.dest(<span class="string">'src/css'</span>));    <span class="comment">//将会在src/css下生成index.css</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 压缩css</span></span><br><span class="line">gulp.task(<span class="string">'testCssmin'</span>, [<span class="string">'testLess'</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="comment">// 先执行testLess任务后再执行cssmin任务，必须加上rutrun才能异步</span></span><br><span class="line">    <span class="keyword">return</span> gulp.src(<span class="string">'src/css/*.css'</span>)</span><br><span class="line">        .pipe(concat(<span class="string">'libs.min.css'</span>))    <span class="comment">// 先合并css后再压缩</span></span><br><span class="line">        .pipe(cleanCSS())</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist/css'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 压缩js</span></span><br><span class="line">gulp.task(<span class="string">'jsmin'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.src(<span class="string">'src/js/*.js'</span>)</span><br><span class="line">        .pipe(concat(<span class="string">'libs.min.js'</span>))    <span class="comment">// 先合并js后再压缩</span></span><br><span class="line">        .pipe(uglify())</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist/js'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改html的引用地址</span></span><br><span class="line">gulp.task(<span class="string">'testUseref'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.src(<span class="string">'src/*.html'</span>)</span><br><span class="line">        .pipe(useref())</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// watch暂时先不启动</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// // watch监听less文件 自动执行less编辑后压缩</span></span><br><span class="line"><span class="comment">// gulp.task('watchLess', function () &#123;</span></span><br><span class="line"><span class="comment">//     gulp.watch('src/less/*.less', ['testCssmin']);</span></span><br><span class="line"><span class="comment">// &#125;);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// // watch监听js，有更改就输出log</span></span><br><span class="line"><span class="comment">// gulp.task('watchJs', function () &#123;</span></span><br><span class="line"><span class="comment">//     gulp.watch('src/js/*.js', function (event) &#123;</span></span><br><span class="line"><span class="comment">//         console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');</span></span><br><span class="line"><span class="comment">//     &#125;);</span></span><br><span class="line"><span class="comment">// &#125;);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行定义任务</span></span><br><span class="line">gulp.task(<span class="string">'default'</span>,[</span><br><span class="line">  <span class="string">'copy'</span>,</span><br><span class="line">  <span class="string">'jsmin'</span>,</span><br><span class="line">  <span class="string">'testCssmin'</span>,</span><br><span class="line">  <span class="string">'testHtmlmin'</span></span><br><span class="line">  <span class="comment">// 'watchLess',</span></span><br><span class="line">  <span class="comment">// 'watchJs'</span></span><br><span class="line">]);</span><br></pre></td></tr></table></figure></p>
+<h3 id="运行gulp"><a href="#运行gulp" class="headerlink" title="运行gulp"></a>运行gulp</h3><p>编译less：命令提示符执行:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全部运行</span></span><br><span class="line">gulp</span><br><span class="line"><span class="comment"># 运行指定模块</span></span><br><span class="line">gulp testLess</span><br></pre></td></tr></table></figure></p>
+<p>打包后生成的文件目录dist<br><img src="/archives/23049/002.png" alt="打包后目录"></p>
+<ul>
+<li>最后还差一步，引用css、js自动添加版本号，找了很多资料，没有一个能很好解决</li>
+</ul>
+<h3 id="项目地址：-https-github-com-sweida-gulp-demo"><a href="#项目地址：-https-github-com-sweida-gulp-demo" class="headerlink" title="项目地址： https://github.com/sweida/gulp-demo"></a>项目地址： <a href="https://github.com/sweida/gulp-demo" target="_blank" rel="noopener">https://github.com/sweida/gulp-demo</a></h3>
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="javascript:;">sweida</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/archives/45699.html" class="pre-post btn btn-default" title='Webpack快速入门'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Webpack快速入门</span>
+        </a>
+    
+    
+        <a href="/archives/12322.html" class="next-post btn btn-default" title='Grunt快速入门'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Grunt快速入门</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!-- <script type="text/javascript" src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        owner:"sweida",
+        repo:"sweida.github.io",
+        oauth: {
+          client_id:"9a486808f778b7b4eac8",
+          client_secret:"78226662fa23e0991de5a220a2e2a233f43cae87"
+        },
+        perPage:"10",
+    });
+    gitment.render('comments');
+</script>
+
+<style media="screen">
+.gitment-footer-container{
+  display: none;
+}
+.gitment-comment-main::before {
+  border-right-color: #7EA4CA;
+}
+/* .gitment-comment-main,
+.gitment-editor-main,
+.gitment-editor-header {
+  border: 1px solid #e67e22;
+}
+.gitment-editor-tab.gitment-selected{
+  border: none;
+}
+.gitment-editor-main::before, .gitment-comment-main::before {
+  border-right-color: #e67e22;
+} */
+
+</style>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Rails"><span class="toc-text">什么是Rails</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rails哲学的两种主要指导原则"><span class="toc-text">Rails哲学的两种主要指导原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Ruby"><span class="toc-text">什么是Ruby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为何选择Ruby"><span class="toc-text">为何选择Ruby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rails-优势"><span class="toc-text">Rails 优势:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVC框架简介"><span class="toc-text">MVC框架简介</span></a></li></ol>
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--<a id="toc-btn">
+    <i class="fa fa-bars"></i>
+</a>-->
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>&copy; 2017-2018 <a href="//github.com/sweida" class="copyright-links" target="_blank" rel="nofollow">sweida</a> 强力驱动
+                </span> |
+                <span>
+                  备案：不存在的！
+                    <!-- 由 <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a> 强力驱动 -->
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>

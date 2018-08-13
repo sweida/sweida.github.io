@@ -1,0 +1,364 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Start Here">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://sweida.github.io">
+    <!--SEO-->
+
+<meta name="description" content="个人技术学习分享博客，前端技术分享"/>
+
+
+
+<meta name="keywords" content="技术博客,前端技术"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Grunt快速入门 | Start Here</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.png">
+
+    
+
+
+    <link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background:url(../../img/banner.jpg) 0 -470px;background-size:100%;"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='施伟达'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 人生若只如初见 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/前端"><i class="fa "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/后端"><i class="fa "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工具"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/myGitbook"><i class="fa "></i>Gitbook</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/vip"><i class="fa "></i>vip视频</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Grunt快速入门">
+            
+	            Grunt快速入门
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/工具">
+            工具
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Grunt" title='Grunt'>
+                        Grunt
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/06/21</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p><img src="/archives/12322/000.png" alt="grunt"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>各位web前端开发人员，如果你现在还不知道grunt或者听说过但是不会熟练使用grunt，那你就真的真的真的out了。还有一点，它完全免费，没有盗版。既强大又免费的东西，为何不用？</p>
+<p>当然了，你如果你能找到更好的替代grunt的其他工具也是可以的，例如gulp。Gulp未来有可能替代grunt，但是现在来说市场占有率还是不如grunt。而这种工具咱们是现在就需要用的，所有不要再犹豫了，拿来主义，先用grunt，即学即用。</p>
+<p>Grunt是一套前端自动化工具，一个基于nodeJs的命令行工具，最基本的用法有：</p>
+<ol>
+<li>压缩文件</li>
+<li>合并文件</li>
+<li>简单语法检查</li>
+</ol>
+<blockquote>
+<p>文章底部附带项目的github地址</p>
+</blockquote>
+<h2 id="安装-CLI"><a href="#安装-CLI" class="headerlink" title="安装 CLI"></a>安装 CLI</h2><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g grunt-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
+<p>安装grunt-cli并不等于安装了 Grunt！Grunt CLI的任务很简单：调用与Gruntfile在同一目录中 Grunt。</p>
+<blockquote>
+<p>开始使用grunt很简单，在项目的根目录中添加两份文件：package.json 和 Gruntfile.js。</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"grunt_demo"</span>,</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">    <span class="attr">"description"</span>: <span class="string">"A grunt project"</span>,</span><br><span class="line">    <span class="attr">"author"</span>: <span class="string">"sweida &lt;weida@ifm360.cn&gt;"</span>,</span><br><span class="line">    <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>devDependencies是什么意思？字面意思解释是“开发依赖项”。即我们现在这个系统，将会依赖于哪些工具来开发。现在代码一行都没有写，依赖于谁？谁也不依赖！所以，就先写一个空对象。但是下文会慢慢把它填充起来。</p>
+<h2 id="安装Grunt"><a href="#安装Grunt" class="headerlink" title="安装Grunt"></a>安装Grunt</h2><p>下面这条命令将安装Grunt最新版本到项目目录中，并将其添加到package.json中的devDependencies内：<br><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install grunt --<span class="built_in">save</span>-<span class="built_in">dev</span></span><br></pre></td></tr></table></figure></p>
+<p>安装后package.json<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"grunt_demo"</span>,</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">    <span class="attr">"description"</span>: <span class="string">"A grunt project"</span>,</span><br><span class="line">    <span class="attr">"author"</span>: <span class="string">"sweida &lt;weida@ifm360.cn&gt;"</span>,</span><br><span class="line">    <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">        <span class="attr">"grunt"</span>: <span class="string">"^1.0.2"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="项目代码目录结构如下"><a href="#项目代码目录结构如下" class="headerlink" title="项目代码目录结构如下"></a>项目代码目录结构如下</h2><p><img src="/archives/12322/002.png" alt="代码目录"></p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h3 id="合并：grunt-contrib-concat"><a href="#合并：grunt-contrib-concat" class="headerlink" title="合并：grunt-contrib-concat"></a>合并：grunt-contrib-concat</h3><p>安装如下（下面插件同样方法）<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> grunt-contrib-<span class="keyword">concat</span> <span class="comment">--save-dev</span></span><br></pre></td></tr></table></figure></p>
+<p>合并代码是我们最需要的一个功能了，当项目变大并且模块很多的时候，随便拿一个项目来说，index页面会有一列的js代码，如下图所示：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/jquery-1.10.1.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/jquery.edslider.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/swiper.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/common.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>我们需要将这些css、js合并为一个文件，大大减少网络请求数量因此来提升性能。grunt-contrib-concat完美胜任，下面我们来看看基本配置用法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Gruntfile.js文件</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 任务配置，所有插件的配置信息</span></span><br><span class="line">  grunt.initConfig(&#123;</span><br><span class="line">    pkg: grunt.file.readJSON(<span class="string">'package.json'</span>),</span><br><span class="line">    concat: &#123;</span><br><span class="line">      cssConcat:&#123;</span><br><span class="line">        src:[<span class="string">'src/css/*.css'</span>],</span><br><span class="line">        dest:<span class="string">'dist/css/&lt;%= pkg.name %&gt; - &lt;%= grunt.template.today("yyyy-mm-dd") %&gt;.css'</span> <span class="comment">//dest 是目的地输出</span></span><br><span class="line">      &#125;,</span><br><span class="line">      jsConcat:&#123;</span><br><span class="line">        src:<span class="string">'src/js/*.js'</span>,</span><br><span class="line">        dest:<span class="string">'dist/js/&lt;%= pkg.name %&gt;.js'</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 告诉grunt 我们将要使用的插件</span></span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-contrib-concat'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 告诉grunt 我们在终端输入grunt时需要做些什么（注意先后顺序）</span></span><br><span class="line">  grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'concat'</span>]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>将src中所有css、js文件合并为一个，放在dist目录下，名字为package.json配置中项目name。如下所示：<br><img src="/archives/12322/004.png" alt="js合并后目录"></p>
+<h3 id="压缩：grunt-contrib-uglify和grunt-contrib-cssmin"><a href="#压缩：grunt-contrib-uglify和grunt-contrib-cssmin" class="headerlink" title="压缩：grunt-contrib-uglify和grunt-contrib-cssmin"></a>压缩：grunt-contrib-uglify和grunt-contrib-cssmin</h3><p>合并文件后，体积仍然比较大，上线之前要将代码压缩，因此我们接着将上一步合并后的代码压缩，这里就需要用到grunt-contrib-uglify和grunt-contrib-cssmin插件。<br>在使用grunt-contrib-uglify插件之前如果有用es6语法，需要将es6语法用babel转成es5才能正常压缩</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装压缩</span></span><br><span class="line">npm <span class="keyword">install </span>--save-dev grunt-contrib-uglify grunt-contrib-cssmin</span><br><span class="line"><span class="comment"># 安装babel</span></span><br><span class="line">npm <span class="keyword">install </span>--save-dev grunt-<span class="keyword">babel </span><span class="keyword">babel-preset-env </span><span class="keyword">babel-core</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line">  grunt.initConfig(&#123;</span><br><span class="line">    pkg: grunt.file.readJSON(<span class="string">'package.json'</span>),</span><br><span class="line">    concat: &#123;</span><br><span class="line">      cssConcat:&#123;</span><br><span class="line">        src:[<span class="string">'src/css/*.css'</span>],</span><br><span class="line">        dest:<span class="string">'dist/css/&lt;%= pkg.name %&gt; - &lt;%= grunt.template.today("mm-dd") %&gt;.css'</span> <span class="comment">//dest 是目的地输出</span></span><br><span class="line">      &#125;,</span><br><span class="line">      jsConcat:&#123;</span><br><span class="line">        src:<span class="string">'src/js/*.js'</span>,</span><br><span class="line">        dest:<span class="string">'dist/js/&lt;%= pkg.name %&gt;.js'</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    babel: &#123;</span><br><span class="line">      options: &#123;</span><br><span class="line">        sourceMap: <span class="literal">true</span>,</span><br><span class="line">        presets: [<span class="string">'env'</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      dist: &#123;</span><br><span class="line">        files: [&#123;</span><br><span class="line">          expand:<span class="literal">true</span>,</span><br><span class="line">          cwd: <span class="string">'dist'</span>,     <span class="comment">//js目录下</span></span><br><span class="line">          src: <span class="string">'**/&lt;%= pkg.name %&gt;.js'</span>,  <span class="comment">//所有js文件</span></span><br><span class="line">          dest: <span class="string">'dist'</span>  <span class="comment">//输出到此目录下</span></span><br><span class="line">        &#125;]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    cssmin:&#123;</span><br><span class="line">      options:&#123;</span><br><span class="line">        banner: <span class="string">'/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("mm-dd") %&gt; */\n'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      build:&#123;</span><br><span class="line">        src:<span class="string">'dist/css/*.css'</span>,<span class="comment">//压缩是要压缩合并了的</span></span><br><span class="line">        dest:<span class="string">'dist/css/&lt;%= pkg.name %&gt; - &lt;%= grunt.template.today("mm-dd") %&gt;.min.css'</span> <span class="comment">//dest 是目的地输出</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    uglify: &#123;</span><br><span class="line">      options: &#123;</span><br><span class="line">        banner: <span class="string">'/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */\n'</span>  <span class="comment">// 在文件头部添加压缩时间</span></span><br><span class="line">      &#125;,</span><br><span class="line">      build: &#123;</span><br><span class="line">        src: <span class="string">'dist/js/&lt;%= pkg.name %&gt;.js'</span>,      <span class="comment">//所在js文件</span></span><br><span class="line">        dest: <span class="string">'dist/js/&lt;%= pkg.name %&gt;.min.js'</span>  <span class="comment">//输出到此目录下</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 告诉grunt 我们将要使用的插件</span></span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-contrib-concat'</span>);</span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-contrib-uglify'</span>);</span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-contrib-cssmin'</span>);</span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-babel'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 告诉grunt 我们在终端输入grunt时需要做些什么（注意先后顺序）</span></span><br><span class="line">  grunt.registerTask(<span class="string">'default'</span>, [</span><br><span class="line">    <span class="string">'concat'</span>,</span><br><span class="line">    <span class="string">'cssmin'</span>,</span><br><span class="line">    <span class="string">'babel'</span>,</span><br><span class="line">    <span class="string">'uglify'</span></span><br><span class="line">  ]);</span><br><span class="line">&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这里我将concat后的js文件仍然输出到当前目录dest/js下，多个了min.js，如下图所示：<br><img src="/archives/12322/005.png" alt="js压缩后目录"></p>
+<h3 id="引用替换：grunt-usemin、grunt-contrib-copy、grunt-contrib-clean"><a href="#引用替换：grunt-usemin、grunt-contrib-copy、grunt-contrib-clean" class="headerlink" title="引用替换：grunt-usemin、grunt-contrib-copy、grunt-contrib-clean"></a>引用替换：grunt-usemin、grunt-contrib-copy、grunt-contrib-clean</h3><p>前端优化是尽量减少http请求，所以我们需要尽量合并压缩文件，然后调用压缩后的文件，比如多个css文件压缩成一个，多个js文件合并压缩等，grunt-usemin能够自动在html中使用压缩后的文件，达到上面的目的。</p>
+<p>因此首先我们需要用到grunt-contrib-copy插件，将源代码copy一份，然后在副本上进行压缩合并，这样无论是全部压缩还是部分压缩就比较灵活了，copy之后就可以使用grunt-usemin插件了，usemin是一个多任务插件，它包括两个任务，useminPrepare和usemin。</p>
+<p>useminPrepare用来检测html页面中的脚本块，包括脚本文件的源路径，目的路径，从而更新后续需要使用到的Grunt任务的配置信息，如前面使用的concat，uglify。useminPrepare只是分析文件，获取文件及路径信息，不更新内容。</p>
+<p>而usemin则进行文件引用替换，将源文件中的文件块替换为压缩文件。useminPrepare已经帮助我们自动配置了concat，uglify针对的源文件以及目的文件的路径信息,因此就无需再手动配置concat和uglify任务了。配置代码如下<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- build:css css/grunt_demo.min.css --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/jquery-1.10.1.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/jquery.edslider.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/swiper.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./js/common.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- endbuild --&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>注意js需要<code>&lt;!-- build:css css/App.min.css --&gt;&lt;!-- endbuild --&gt;</code>这样包裹着usemin才能起效<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line">    grunt.initConfig(&#123;</span><br><span class="line">        pkg: grunt.file.readJSON(<span class="string">'package.json'</span>),</span><br><span class="line">        clean: &#123;</span><br><span class="line">            src: <span class="string">'build/'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        useminPrepare: &#123;</span><br><span class="line">            html: <span class="string">'build/index.html'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">                dest: <span class="string">'build'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        cssmin: &#123;</span><br><span class="line">            buildrelease: &#123;</span><br><span class="line">                options: &#123;</span><br><span class="line">                    report: <span class="string">"min"</span> <span class="comment">//输出压缩率</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        uglify: &#123;</span><br><span class="line">            buildrelease: &#123;</span><br><span class="line">                options: &#123;</span><br><span class="line">                    report: <span class="string">"min"</span> <span class="comment">//输出压缩率</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        usemin: &#123;</span><br><span class="line">            html: <span class="string">'build/index.html'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">                dest: <span class="string">'build'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        copy: &#123;</span><br><span class="line">            html: &#123;</span><br><span class="line">                files: [&#123;</span><br><span class="line">                    expand: <span class="literal">true</span>,</span><br><span class="line">                    cwd: <span class="string">'src'</span>,</span><br><span class="line">                    src: <span class="string">'**/*'</span>,</span><br><span class="line">                    dest: <span class="string">'build/'</span></span><br><span class="line">                &#125;]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 告诉grunt 我们将要使用的插件</span></span><br><span class="line">    grunt.loadNpmTasks(<span class="string">'grunt-contrib-concat'</span>);</span><br><span class="line">    grunt.loadNpmTasks(<span class="string">'grunt-contrib-uglify'</span>);</span><br><span class="line">    grunt.loadNpmTasks(<span class="string">'grunt-contrib-cssmin'</span>);</span><br><span class="line">    grunt.loadNpmTasks(<span class="string">'grunt-contrib-clean'</span>);</span><br><span class="line">    grunt.loadNpmTasks(<span class="string">'grunt-contrib-copy'</span>);</span><br><span class="line">    grunt.loadNpmTasks(<span class="string">'grunt-usemin'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 告诉grunt 我们在终端输入grunt时需要做些什么（注意先后顺序）</span></span><br><span class="line">    grunt.registerTask(<span class="string">'default'</span>, [</span><br><span class="line">      <span class="string">'clean'</span>,</span><br><span class="line">      <span class="string">'copy'</span>,</span><br><span class="line">      <span class="string">'useminPrepare'</span>,</span><br><span class="line">      <span class="string">'concat'</span>,</span><br><span class="line">      <span class="string">'cssmin'</span>,</span><br><span class="line">      <span class="string">'uglify'</span>,</span><br><span class="line">      <span class="string">'usemin'</span></span><br><span class="line">    ]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>上面又引入了一个clean插件，每次构建时候先清除build目录，这样build目录就是我们打包后的要的结果了。目录结构如下：<br><img src="/archives/12322/006.png" alt="最后目录"></p>
+<h2 id="项目地址：-https-github-com-sweida-grunt-demo"><a href="#项目地址：-https-github-com-sweida-grunt-demo" class="headerlink" title="项目地址： https://github.com/sweida/grunt-demo"></a>项目地址： <a href="https://github.com/sweida/grunt-demo" target="_blank" rel="noopener">https://github.com/sweida/grunt-demo</a></h2><!-- ### 使用watch插件（真正实现自动化）
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install grunt-contrib-watch --<span class="built_in">save</span>-<span class="built_in">dev</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在上面基础上填充</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line">  grunt.initConfig(&#123;</span><br><span class="line">    watch: &#123;</span><br><span class="line">      scripts: &#123;</span><br><span class="line">        files: [<span class="string">'src/js/*.js'</span>, <span class="string">'src/css/*.css'</span>],</span><br><span class="line">        tasks: [<span class="string">'uglify'</span>],</span><br><span class="line">        options: &#123;<span class="attr">spawn</span>: <span class="literal">false</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-contrib-watch'</span>);</span><br><span class="line"></span><br><span class="line">  grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'concat'</span>, <span class="string">'babel'</span>, <span class="string">'uglify:buildrelease'</span>, <span class="string">'watch'</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>watch插件配置完成。运行grunt命令，控制台提示watch已经开始监听。每次修改js、css文件就会自动运行，想要停止，按ctrl + c即可<br><img src="12322/007.png" alt="watch监听"> –&gt;</p>
+-->
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="javascript:;">sweida</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/archives/23049.html" class="pre-post btn btn-default" title='Gulp快速入门'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Gulp快速入门</span>
+        </a>
+    
+    
+        <a href="/archives/30083.html" class="next-post btn btn-default" title='理解Gulp和Webpack'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">理解Gulp和Webpack</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!-- <script type="text/javascript" src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        owner:"sweida",
+        repo:"sweida.github.io",
+        oauth: {
+          client_id:"9a486808f778b7b4eac8",
+          client_secret:"78226662fa23e0991de5a220a2e2a233f43cae87"
+        },
+        perPage:"10",
+    });
+    gitment.render('comments');
+</script>
+
+<style media="screen">
+.gitment-footer-container{
+  display: none;
+}
+.gitment-comment-main::before {
+  border-right-color: #7EA4CA;
+}
+/* .gitment-comment-main,
+.gitment-editor-main,
+.gitment-editor-header {
+  border: 1px solid #e67e22;
+}
+.gitment-editor-tab.gitment-selected{
+  border: none;
+}
+.gitment-editor-main::before, .gitment-comment-main::before {
+  border-right-color: #e67e22;
+} */
+
+</style>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Rails"><span class="toc-text">什么是Rails</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rails哲学的两种主要指导原则"><span class="toc-text">Rails哲学的两种主要指导原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Ruby"><span class="toc-text">什么是Ruby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为何选择Ruby"><span class="toc-text">为何选择Ruby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rails-优势"><span class="toc-text">Rails 优势:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVC框架简介"><span class="toc-text">MVC框架简介</span></a></li></ol>
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--<a id="toc-btn">
+    <i class="fa fa-bars"></i>
+</a>-->
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>&copy; 2017-2018 <a href="//github.com/sweida" class="copyright-links" target="_blank" rel="nofollow">sweida</a> 强力驱动
+                </span> |
+                <span>
+                  备案：不存在的！
+                    <!-- 由 <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a> 强力驱动 -->
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>

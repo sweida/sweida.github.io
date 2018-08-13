@@ -1,0 +1,362 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Start Here">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://sweida.github.io">
+    <!--SEO-->
+
+<meta name="description" content="个人技术学习分享博客，前端技术分享"/>
+
+
+
+<meta name="keywords" content="技术博客,前端技术"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Ruby on Rails简介 | Start Here</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.png">
+
+    
+
+
+    <link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background:url(../../img/banner.jpg) 0 -470px;background-size:100%;"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='施伟达'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 人生若只如初见 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/前端"><i class="fa "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/后端"><i class="fa "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工具"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/myGitbook"><i class="fa "></i>Gitbook</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/vip"><i class="fa "></i>vip视频</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Ruby on Rails简介">
+            
+	            Ruby on Rails简介
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/后端">
+            后端
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Rails" title='Rails'>
+                        Rails
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/08/13</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="什么是Rails"><a href="#什么是Rails" class="headerlink" title="什么是Rails"></a>什么是Rails</h3><ul>
+<li><p>Rails是Ruby on Rails的官方简称，非官方简称为RoR。在RubyOnRails的官网对Rails的定义是：Rails is a web application development framework written in the Ruby language. 翻译过来就是，Rails 是一个用Ruby语言写的，web应用开发的框架。</p>
+</li>
+<li><p>所谓web应用框架，是一种开发框架，用来支持动态网站、网络应用程序及网络服务的开发。这种框架有助于减轻网页开发时共同性活动的工作负荷，例如许多框架提供数据库访问接口、标准样板及会话管理等，课提升代码的可再用性。</p>
+</li>
+<li><p>而Rails的存在，是为了相比于其他的语言或框架，你可以用更少的代码去完成相同的事情。而很多资深的Rails框架使用者也表示，使用这种框架开发更有乐趣。</p>
+</li>
+</ul>
+<h3 id="Rails哲学的两种主要指导原则"><a href="#Rails哲学的两种主要指导原则" class="headerlink" title="Rails哲学的两种主要指导原则"></a>Rails哲学的两种主要指导原则</h3><ul>
+<li><p>DRY:Don’t Repeat Yourself (不要重复自己): DRY是软件开发的一个原则，它表示“系统的每一部分，必须有一个单一的，明确的，权威的表示，必须能够表达所应表达的内容，而不含重复的代码。这样使我们的代码由更好的可维护性、扩展性，且有更少的错误。</p>
+</li>
+<li><p>Convention Over Configuration (约定优于配置): Rails认为web应用程序中的很多操作都有最好的方式去完成，并将其设定为默认值，这使得程序员无需在配置文件中设置很多细节。如果你依照Rails的惯例，将会有令人惊艳的成果，但是对初学者可能会有点困难，例如，当你从一个已经存在的应用程序开始写，将会有很多隐藏的设定在应用程序的代码里。这些设定会让程序更加简洁，但是也会让初学者非常困惑。但是当你熟悉了这个惯例之后，将会有如虎添翼的效果。</p>
+</li>
+</ul>
+<h3 id="什么是Ruby"><a href="#什么是Ruby" class="headerlink" title="什么是Ruby"></a>什么是Ruby</h3><p>Rails是一套使用Ruby开发的网站框架，因此要认识Rails，对Ruby有一定的了解也是必须的。</p>
+<p>Ruby是个一种面向对象、命令式、函数式、动态的编程语言，在20世纪90年代中期由日本人松本行弘(Matz)设计并开发。Ruby有着简单哲学、高生产力、精巧、自然的语法，它的设计目的是要让程式设计师能够快乐的写程式。</p>
+<p>静态语言和动态语言的差别在于，前者的变数型别需要事前宣告，后者则是执行器才动态决定。实务上的表现就是，Ruby可以被动态直译(就像PHP)，所以没有编译(如C、Java)，这加速了迭代式开发。一个Ruby程序可以动态产生程序，即使正在执行也可以修改。Rails内部就使用这个能力，来让你可以简单享受所谓的“Magic”。</p>
+<h3 id="为何选择Ruby"><a href="#为何选择Ruby" class="headerlink" title="为何选择Ruby"></a>为何选择Ruby</h3><p>Ruby是一套非常重视使用性(Usability)的编程语言，非常看重代码的可读性及维护性。Matz在设计Ruby的时候，就特别考量一般人容不容易了解，这也是为什么我们常常会听到Ruby的代码自然简洁又漂亮。</p>
+<p>Ruby也是目前做Domain-specific language(DSL)，特别是Internal DSL最为成功的语言。透过DSL，代码不但可以拥有非常好的可读性，也可以大幅增加生产力。</p>
+<h3 id="Rails-优势"><a href="#Rails-优势" class="headerlink" title="Rails 优势:"></a>Rails 优势:</h3><p>Rails是包装功能，更有效率，许多基础上另一个具有以下特点。</p>
+<ul>
+<li><p>元编程 : 其他框架使用大量的代码生成从零开始。使用元编程技术方案编写程序。 Ruby是的元编程最好的语言之一，Rails使用此功能。Rails的也采用代码生成，元编程繁重，但更依赖。</p>
+</li>
+<li><p>活动记录 : Rails 介绍活动记录的框架，这将对象保存到数据库。活动记录发现 Rails版本的数据库架构中的列，并自动附加到对象域使用元编程。</p>
+</li>
+<li><p>约定优于配置: 大多数Web开发框架.NET或Java，迫使写配置代码的页面。如果遵循建议的命名约定时，Rails不需要太多的配置。</p>
+</li>
+<li><p>脚手架: 经常在发展的早期阶段，以帮助应用程序快速创建临时代码，主要组成部分是如何一起工作。 Rails自动创建很多需要的脚手架。</p>
+</li>
+<li><p>内置测试: Rails创建简单的自动化测试，也可以扩展。Rails也提供支持所谓的安全带及装置，使更容易编写和运行测试用例的代码。 Ruby可以执行所有耙子实用程序的自动化测试。</p>
+</li>
+<li><p>三种环境: Rails 提供了三种默认的环境：开发，测试和生产。每个人的行为方式略有不同，更容易使整个软件开发周期。例如，Rails的测试数据库中创建一个新的副本，每个测试运行。</p>
+</li>
+</ul>
+<h3 id="MVC框架简介"><a href="#MVC框架简介" class="headerlink" title="MVC框架简介"></a>MVC框架简介</h3><blockquote>
+<p>MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写。<br>是一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。</p>
+</blockquote>
+<ul>
+<li>Model（模型）：处理数据及业务逻辑，通常负责对数据库进行存取操作。</li>
+<li>View（视图）：显示用户界面，处理数据显示，通常依据模型数据来创建。</li>
+<li>Controller（控制器）：处理用户请求及应用逻辑，通常控制器负责从视图读取数据，控制用户输入，并向模型发送数据。</li>
+</ul>
+<p>MVC 分层有助于管理复杂的应用程序，同时也简化了分组开发。不同的开发人员可同时开发视图、控制器逻辑和业务逻辑。</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="javascript:;">sweida</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/archives/22843.html" class="next-post btn btn-default" title='laravel学习笔记'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">laravel学习笔记</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!-- <script type="text/javascript" src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        owner:"sweida",
+        repo:"sweida.github.io",
+        oauth: {
+          client_id:"9a486808f778b7b4eac8",
+          client_secret:"78226662fa23e0991de5a220a2e2a233f43cae87"
+        },
+        perPage:"10",
+    });
+    gitment.render('comments');
+</script>
+
+<style media="screen">
+.gitment-footer-container{
+  display: none;
+}
+.gitment-comment-main::before {
+  border-right-color: #7EA4CA;
+}
+/* .gitment-comment-main,
+.gitment-editor-main,
+.gitment-editor-header {
+  border: 1px solid #e67e22;
+}
+.gitment-editor-tab.gitment-selected{
+  border: none;
+}
+.gitment-editor-main::before, .gitment-comment-main::before {
+  border-right-color: #e67e22;
+} */
+
+</style>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Rails"><span class="toc-text">什么是Rails</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rails哲学的两种主要指导原则"><span class="toc-text">Rails哲学的两种主要指导原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Ruby"><span class="toc-text">什么是Ruby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为何选择Ruby"><span class="toc-text">为何选择Ruby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rails-优势"><span class="toc-text">Rails 优势:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVC框架简介"><span class="toc-text">MVC框架简介</span></a></li></ol>
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--<a id="toc-btn">
+    <i class="fa fa-bars"></i>
+</a>-->
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>&copy; 2017-2018 <a href="//github.com/sweida" class="copyright-links" target="_blank" rel="nofollow">sweida</a> 强力驱动
+                </span> |
+                <span>
+                  备案：不存在的！
+                    <!-- 由 <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a> 强力驱动 -->
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>

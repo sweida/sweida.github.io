@@ -1,0 +1,425 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Start Here">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://sweida.github.io">
+    <!--SEO-->
+
+<meta name="description" content="个人技术学习分享博客，前端技术分享"/>
+
+
+
+<meta name="keywords" content="技术博客,前端技术"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>理解Gulp和Webpack | Start Here</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.png">
+
+    
+
+
+    <link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background:url(../../img/banner.jpg) 0 -470px;background-size:100%;"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='施伟达'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 人生若只如初见 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/前端"><i class="fa "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/后端"><i class="fa "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工具"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/myGitbook"><i class="fa "></i>Gitbook</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/vip"><i class="fa "></i>vip视频</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="理解Gulp和Webpack">
+            
+	            理解Gulp和Webpack
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/工具">
+            工具
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Gulp" title='Gulp'>
+                        Gulp
+                    </a>
+                
+                    <a href="/tags/Webpack" title='Webpack'>
+                        Webpack
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/06/21</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p><img src="/archives/30083/001.jpg" alt="理解Gulp和Webpack"></p>
+<h3 id="Gulp-为何物？"><a href="#Gulp-为何物？" class="headerlink" title="Gulp 为何物？"></a>Gulp 为何物？</h3><p>先来听听 Ta 的官网是怎么说：</p>
+<blockquote>
+<p>Gulp 致力于 自动化和优化 你的工作流，它是一个自动化你开发工作中 痛苦又耗时任务 的工具包。</p>
+</blockquote>
+<p>Gulp 就是为了规范前端开发流程，实现前后端分离、模块化开发、版本控制、文件合并与压缩、mock数据等功能的一个前端自动化构建工具。说的形象点，“Gulp就像是一个产品的流水线，整个产品从无到有，都要受流水线的控制，在流水线上我们可以对产品进行管理</p>
+<h3 id="webpack-又是什么东西"><a href="#webpack-又是什么东西" class="headerlink" title="webpack 又是什么东西?"></a>webpack 又是什么东西?</h3><p>老规矩，先看看webpack官网怎么吹牛逼介绍自己的：</p>
+<blockquote>
+<p>Webpack 是当下最热门的前端资源模块化 管理和打包 工具。它可以将许多松散的模块按照依赖和规则打包成符合生产环境部署的前端资源。还可以将按需加载的模块进行代码分割，等到实际需要的时候再异步加载。</p>
+</blockquote>
+<p>单页应用的核心是模块化，ES6 之前 JavaScript 语言本身一直是没有模块系统的，导致 AMD，CMD，UMD 各种轮子模块化方案都蹦出来。对这种模块化乱象，gulp 显得无能为力，gulp 插件对这一块也没有什么想法。不过也可以理解，模块化解决方案可不是谁都能 hold 住的，需要考虑的问题太多了；<br>对前沿的 SPA 技术 gulp 处理起来显得有些力不从心，例如 Vue 的单文件组件，gulp 配合一些插件可以勉强处理，但是很蹩脚。其实归根结底，还是模块化处理方面的不足；<br>优化页面加载速度的一条重要法则就是减少 http 请求。gulp 只是对静态资源做流式处理，处理之后并未做有效的优化整合，也就是说 gulp 忽略了系统层面的处理，这一块还有很大的优化空间，尤其是移动端，那才真的是一寸光阴一寸金啊，哪怕是几百毫秒的优化所带来的收益（用户？流量？付费？）绝对超乎你的想象。别跟我说 gulp-concat，CSS Sprites，这俩玩意儿小打小闹还行，遇上大型应用根本拿不上台面。现在的页面动辄上百个零碎资源（图片，样式表，脚本），也就是上百个 http 请求，因此这个优化需求还是相当迫切的。关于为何减少 http 请求可以有效降低页面加载时间戳这里。</p>
+<h3 id="首先从概念上可以看出，Gulp和Webpack的侧重点是不同的。"><a href="#首先从概念上可以看出，Gulp和Webpack的侧重点是不同的。" class="headerlink" title="首先从概念上可以看出，Gulp和Webpack的侧重点是不同的。"></a>首先从概念上可以看出，Gulp和Webpack的侧重点是不同的。</h3><blockquote>
+<h4 id="Gulp-是基于流的？"><a href="#Gulp-是基于流的？" class="headerlink" title="Gulp 是基于流的？"></a>Gulp 是基于流的？</h4><p>流（Stream）不是 gulp 创造的概念，而是从 unix 时代就开始使用的 I/O 机制，一直到现在仍在广泛使用。Node 封装了一个 stream 模块专门用来对流进行操作。gulp 所基于的流即是 Node 封装起来的 stream。上面 <code>gulp.task()</code> 代码里面的 pipe 方法并不是 gulp 提供的 api，而是 node 的 api，准确的说应该是 node 的 stream 模块提供的 api。具体是怎么实现的呢：<code>gulp.src()</code> 的返回值是 node Stream 的一个实例，之后的 pipe 调用的其实是这个实例的 pipe 方法，而 pipe 方法的返回值依然是 node Stream 实例，以此实现前面的 <code>.pipe().pipe().pipe()</code> 这种串联写法。熟悉 jQuery 的同学应该很清楚这种技巧。</p>
+</blockquote>
+<blockquote>
+<h4 id="webpack-怎么实现像-gulp-一样对大量源文件进行流式处理"><a href="#webpack-怎么实现像-gulp-一样对大量源文件进行流式处理" class="headerlink" title="webpack 怎么实现像 gulp 一样对大量源文件进行流式处理?"></a>webpack 怎么实现像 gulp 一样对大量源文件进行流式处理?</h4><p>人家 webpack 本来就没打算做这事。webpack 不是以取代 gulp 为目的的，而是为了给大型 SPA 提供更好的构建方案。对大量源文件进行流式处理是 gulp 擅长的事，webpack 不想抢，也没必要抢。即使抢，也无非是再造一个蹩脚的 gulp 出来而已。</p>
+</blockquote>
+<blockquote>
+<h4 id="既然-webpack-模块化这么强，那以后模块化就全用-webpack-好了"><a href="#既然-webpack-模块化这么强，那以后模块化就全用-webpack-好了" class="headerlink" title="既然 webpack 模块化这么强，那以后模块化就全用 webpack 好了?"></a>既然 webpack 模块化这么强，那以后模块化就全用 webpack 好了?</h4><p>webpack 模块化是强，但是他胖啊，不是所有人都抱得动，主要是他为了提供更多的功能封装进了太多东西，所以选择上还是需要因地制宜。如果单纯只是打包 js（多页应用往往是这种需求），完全可以使用 rollup，browserify 这种小而美的实现，因为他们只做一件事——打包js。而如果需要将图片，样式，字体等所有静态资源全部打包，webpack 毫无疑问是首选。这也是为什么越来越多的流行库和框架开始从 webpack 转向使用 rollup 进行打包，因为他们只需要打包 js，webpack 好多强大功能根本用不到。连 rollup 官网也坦言如果你在构建一个库，rollup 绝对是首选，但如果是构建一个应用，那么请选 webpack。</p>
+</blockquote>
+<h3 id="下表是从各个角度对-gulp-和-webpack-做的对比："><a href="#下表是从各个角度对-gulp-和-webpack-做的对比：" class="headerlink" title="下表是从各个角度对 gulp 和 webpack 做的对比："></a>下表是从各个角度对 gulp 和 webpack 做的对比：</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">–</th>
+<th style="text-align:center">Gulp</th>
+<th style="text-align:center">Webpack     </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">定位</td>
+<td style="text-align:center">基于流的自动化构建工具</td>
+<td style="text-align:center">一个万能模块打包器</td>
+</tr>
+<tr>
+<td style="text-align:center">目标</td>
+<td style="text-align:center">自动化和优化开发工作流，为通用 website 开发而生</td>
+<td style="text-align:center">通用模块打包加载器，为移动端大型 SPA 应用而生</td>
+</tr>
+<tr>
+<td style="text-align:center">学习难度</td>
+<td style="text-align:center">易于学习，易于使用，api总共只有5个方法</td>
+<td style="text-align:center">有大量新的概念和api，不过好在有详尽的官方文档</td>
+</tr>
+<tr>
+<td style="text-align:center">适用场景</td>
+<td style="text-align:center">基于流的作业方式适合多页面应用开发</td>
+<td style="text-align:center">一切皆模块的特点适合单页面应用开发</td>
+</tr>
+<tr>
+<td style="text-align:center">工作方式</td>
+<td style="text-align:center">对输入（gulp.src）的 js，ts，scss，less 等源文件依次执行打包（bundle）、编译（compile）、压缩、重命名等处理后输出（gulp.dest）到指定目录中去，为了构建而打包</td>
+<td style="text-align:center">对入口文件（entry）递归解析生成依赖关系图，然后将所有依赖打包在一起，在打包之前会将所有依赖转译成可打包的 js 模块，为了打包而构建</td>
+</tr>
+<tr>
+<td style="text-align:center">使用方式</td>
+<td style="text-align:center">常规 js 开发，编写一系列构建任务（task）</td>
+<td style="text-align:center">编辑各种 JSON 配置项</td>
+</tr>
+<tr>
+<td style="text-align:center">优点</td>
+<td style="text-align:center">适合多页面开发，易于学习，易于使用，接口优雅</td>
+<td style="text-align:center">可以打包一切资源，适配各种模块系统</td>
+</tr>
+<tr>
+<td style="text-align:center">缺点</td>
+<td style="text-align:center">在单页面应用方面输出乏力，而且对流行的单页技术有些难以处理（比如 Vue 单文件组件，使用 gulp 处理就会很困难，而 webpack 一个 loader 就能轻松搞定）</td>
+<td style="text-align:center">不适合多页应用开发，灵活度高但同时配置很繁琐复杂。“打包一切” 这个优点对于 HTTP/1.1 尤其重要，因为所有资源打包在一起能明显减少浏览器访问页面时的资源请求数量，从而减少应用程序必须等待的时间。但这个优点可能会随着 HTTP/2 的流行而变得不那么突出，因为 HTTP/2 的多路复用可以有效解决客户端并行请求时的瓶颈问题。</td>
+</tr>
+<tr>
+<td style="text-align:center">结论</td>
+<td style="text-align:center">浏览器多页应用(MPA)首选方案</td>
+<td style="text-align:center">浏览器单页应用(SPA)首选方案</td>
+</tr>
+</tbody>
+</table>
+<!-- ### 插件推荐
+#### 下面推荐几个 gulp 的插件吧，比较常用的：
+
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">gulp-load-plugins：自动加载 package.<span class="keyword">json </span>中的 gulp 插件</span><br><span class="line">gulp-rename： 重命名</span><br><span class="line">gulp-uglify：文件压缩</span><br><span class="line">gulp-concat：文件合并</span><br><span class="line">gulp-less：编译 less</span><br><span class="line">gulp-sass：编译 sass</span><br><span class="line">gulp-clean-css：压缩 CSS 文件</span><br><span class="line">gulp-htmlmin：压缩 HTML 文件</span><br><span class="line">gulp-<span class="keyword">babel：使用 </span><span class="keyword">babel </span>编译 <span class="keyword">JS </span>文件</span><br><span class="line">gulp-<span class="keyword">jshint：jshint </span>检查</span><br><span class="line">gulp-imagemin：压缩 <span class="keyword">jpg、png、gif </span>等图片</span><br><span class="line">gulp-livereload：当代码变化时，它可以帮我们自动刷新页面</span><br></pre></td></tr></table></figure>
+<h4 id="也推荐几个-webpack-常用的-loader-和-plugin："><a href="#也推荐几个-webpack-常用的-loader-和-plugin：" class="headerlink" title="也推荐几个 webpack 常用的 loader 和 plugin："></a>也推荐几个 webpack 常用的 loader 和 plugin：</h4><p>Loader 列表<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">less-loader, sass-loader：处理样式</span><br><span class="line">url-loader, file-loader：两个都必须用上。否则超过大小限制的图片无法生成到目标文件夹中</span><br><span class="line"><span class="keyword">babel-loader, </span><span class="keyword">babel-preset-es2015, </span><span class="keyword">babel-preset-react：js </span>处理，转码</span><br><span class="line">expose-loader： 将 <span class="keyword">js </span>模块暴露到全局</span><br></pre></td></tr></table></figure></p>
+<p>Plugin 列表<br><code>NormalModuleReplacementPlugin：匹配 resourceRegExp，替换为 newResource
+ContextReplacementPlugin：替换上下文的插件
+IgnorePlugin：不打包匹配文件
+PrefetchPlugin：预加载的插件，提高性能
+ResolverPlugin：替换上下文的插件
+DedupePlugin：打包的时候删除重复或者相似的文件
+MinChunkSizePlugin：把多个小模块进行合并，以减少文件的大小
+LimitChunkCountPlugin：限制打包文件的个数
+MinChunkSizePlugin：根据 chars 大小，如果小于设定的最小值，就合并这些小模块，以减少文件的大小
+OccurrenceOrderPlugin：根据模块调用次数，给模块分配 ids，常被调用的 ids 分配更短的 id，使得 ids 可预测，降低文件大小，该模块推荐使用
+UglifyJsPlugin：压缩 js
+CommonsChunkPlugin：多个 html 共用一个 js 文件(chunk)
+HotModuleReplacementPlugin：模块热替换么，如果不在 dev-server 模式下，需要记录数据，recordPath，生成每个模块的热更新模块
+ProgressPlugin：编译进度
+NoErrorsPlugin：报错但不退出 webpack 进程
+HtmlWebpackPlugin：生成 html</code> –&gt;</p>
+-->
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="javascript:;">sweida</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/archives/12322.html" class="pre-post btn btn-default" title='Grunt快速入门'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Grunt快速入门</span>
+        </a>
+    
+    
+        <a href="/archives/633.html" class="next-post btn btn-default" title='markdown代码块支持高亮显示的语言'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">markdown代码块支持高亮显示的语言</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!-- <script type="text/javascript" src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        owner:"sweida",
+        repo:"sweida.github.io",
+        oauth: {
+          client_id:"9a486808f778b7b4eac8",
+          client_secret:"78226662fa23e0991de5a220a2e2a233f43cae87"
+        },
+        perPage:"10",
+    });
+    gitment.render('comments');
+</script>
+
+<style media="screen">
+.gitment-footer-container{
+  display: none;
+}
+.gitment-comment-main::before {
+  border-right-color: #7EA4CA;
+}
+/* .gitment-comment-main,
+.gitment-editor-main,
+.gitment-editor-header {
+  border: 1px solid #e67e22;
+}
+.gitment-editor-tab.gitment-selected{
+  border: none;
+}
+.gitment-editor-main::before, .gitment-comment-main::before {
+  border-right-color: #e67e22;
+} */
+
+</style>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Rails"><span class="toc-text">什么是Rails</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rails哲学的两种主要指导原则"><span class="toc-text">Rails哲学的两种主要指导原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Ruby"><span class="toc-text">什么是Ruby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为何选择Ruby"><span class="toc-text">为何选择Ruby</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rails-优势"><span class="toc-text">Rails 优势:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVC框架简介"><span class="toc-text">MVC框架简介</span></a></li></ol>
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--<a id="toc-btn">
+    <i class="fa fa-bars"></i>
+</a>-->
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>&copy; 2017-2018 <a href="//github.com/sweida" class="copyright-links" target="_blank" rel="nofollow">sweida</a> 强力驱动
+                </span> |
+                <span>
+                  备案：不存在的！
+                    <!-- 由 <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a> 强力驱动 -->
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>
