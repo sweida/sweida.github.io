@@ -31,7 +31,7 @@
     <!--Title-->
 
 
-<title>vue项目首屏优化之路由懒加载 | Start Here</title>
+<title>python保存json文件并输出中文 | Start Here</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
@@ -144,9 +144,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="vue项目首屏优化之路由懒加载">
+        <h1 id="python保存json文件并输出中文">
             
-	            vue项目首屏优化之路由懒加载
+	            python保存json文件并输出中文
             
         </h1>
         <div class="post-meta">
@@ -154,8 +154,8 @@
     
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/前端">
-            前端
+        <a href="/categories/后端">
+            后端
         </a>
     </span>
     
@@ -165,8 +165,8 @@
         <span class="tags-meta">
             
                 
-                    <a href="/tags/vue" title='vue'>
-                        vue
+                    <a href="/tags/python" title='python'>
+                        python
                     </a>
                 
             
@@ -178,7 +178,7 @@
         
         <span class="fa-wrap">
             <i class="fa fa-clock-o"></i>
-            <span class="date-meta">2018/07/08</span>
+            <span class="date-meta">2018/09/07</span>
         </span>
     
 </div>
@@ -188,17 +188,14 @@
     </div>
     
     <div class="post-body post-content">
-        <p>当打包构建应用时，Javascript 包会变得非常大，影响页面加载。如果我们能把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，这样就更加高效了。<br>结合 Vue 的异步组件和 Webpack 的代码分割功能，轻松实现路由组件的懒加载。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
-<li>首先，可以将异步组件定义为返回一个 Promise 的工厂函数</li>
-<li>然后使用动态 import语法来定义代码分块点。</li>
-<li>结合这两者，定义一个能够被 Webpack 自动代码分割的异步组件。</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原始</span></span><br><span class="line">improt Foo <span class="keyword">from</span> <span class="string">'./Foo'</span></span><br><span class="line"><span class="comment">// 第一种方法，需要配合babel的syntax-dynamic-import插件使用</span></span><br><span class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./Foo.vue'</span>)</span><br><span class="line"><span class="comment">// 第二种方法</span></span><br><span class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">require</span>([<span class="string">'./Foo.vue'</span>], resolve)</span><br></pre></td></tr></table></figure>
-<p>在路由配置中什么都不需要改变，只需要像往常一样使用 Foo：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/Foo'</span>, <span class="attr">component</span>: Foo &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<h3 id="结合上面，路由配置如下"><a href="#结合上面，路由配置如下" class="headerlink" title="结合上面，路由配置如下"></a>结合上面，路由配置如下</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router 文件夹下的index.js文件</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line">improt Router <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br><span class="line">improt Foo <span class="keyword">from</span> <span class="string">'@/pages/Foo'</span> <span class="comment">// 某页面</span></span><br><span class="line"></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 非懒加载</span></span><br><span class="line"><span class="comment">/* const routes = [</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">      path: '/',</span></span><br><span class="line"><span class="comment">      name: 'Foo',</span></span><br><span class="line"><span class="comment">      component: Foo</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">] */</span></span><br><span class="line"><span class="comment">// 懒加载</span></span><br><span class="line"><span class="keyword">const</span> routes= [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    name: <span class="string">'Foo'</span>,</span><br><span class="line">    componet: <span class="function"><span class="params">()</span> =&gt;</span> improt(<span class="string">'@/pages/Foo'</span>) <span class="comment">//其实就相当于按需加载</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(&#123;</span><br><span class="line">    routes</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router</span><br></pre></td></tr></table></figure>
-<p>这就是将不同路由对应的组件分割成不同的代码块，然后当路由被访问时才加载对应组件。</p>
-<h3 id="main-js入口文件关于路由的配置"><a href="#main-js入口文件关于路由的配置" class="headerlink" title="main.js入口文件关于路由的配置"></a>main.js入口文件关于路由的配置</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">improt router <span class="keyword">from</span> <span class="string">'./router'</span> <span class="comment">//引入路由配置文件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    router, <span class="comment">// 注入到根实例中</span></span><br><span class="line">    render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+        <h3 id="python保存json文件并输出中文"><a href="#python保存json文件并输出中文" class="headerlink" title="python保存json文件并输出中文"></a>python保存json文件并输出中文</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io</span><br><span class="line"></span><br><span class="line">sendData = [</span><br><span class="line">  &#123;</span><br><span class="line">    id: <span class="number">1</span>,</span><br><span class="line">    name: <span class="string">'奥特曼'</span></span><br><span class="line">  &#125;,&#123;</span><br><span class="line">    id: <span class="number">2</span>,</span><br><span class="line">    name: <span class="string">'小怪兽'</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> io.open(<span class="string">'data.json'</span>, <span class="string">'w'</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> file:</span><br><span class="line">    json.dump(sendData, file, ensure_ascii=<span class="keyword">False</span>, sort_keys=<span class="keyword">True</span>, indent=<span class="number">2</span>)</span><br><span class="line">print(<span class="string">'保存成功'</span>)</span><br></pre></td></tr></table></figure>
+<p>工作原理</p>
+<p>我们使用 io.open 然后在第一个 open 语句中使用 encoding 参数对信息进行编码，然后在解码信息时再在第二个 open 语句中使用该参数。 请注意，我们应该只在文本模式下使用 open 语句时的使用编码。</p>
+<p>每当我们编写一个使用Unicode文字的程序（通过在字符串之前放置一个 u ）就像我们上面使用的那样，我们必须确保 Python 本身被告知我们的程序使用UTF-8，我们必须把 # encoding=utf-8 注释在我们程序的顶部。</p>
+<p><code>json.dump()</code>将其保存为json格式，<code>ensure_ascii=False</code>禁止使用ascii编码保存，<code>indent=2</code> Tab为2个空格大小</p>
+<p><code>json.loads()</code>读取json文件</p>
+<h3 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">'data'</span>):</span><br><span class="line">     os.mkdir(<span class="string">'data'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="输出今天日期"><a href="#输出今天日期" class="headerlink" title="输出今天日期"></a>输出今天日期</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取今天年月日</span></span><br><span class="line">nowdate = time.localtime(time.time())  <span class="comment"># 获得当前时间戳</span></span><br><span class="line">today = time.strftime(<span class="string">'%Y-%m-%d %H:%M:%S'</span>, nowdate)  <span class="comment"># 转换成指定格式</span></span><br><span class="line">print(today)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2018</span><span class="number">-09</span><span class="number">-07</span> <span class="number">18</span>:<span class="number">08</span>:<span class="number">12</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -216,15 +213,10 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/archives/8964.html" class="pre-post btn btn-default" title='ES6模块的import和export用法总结'>
-            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">ES6模块的import和export用法总结</span>
-        </a>
     
-    
-        <a href="/archives/33799.html" class="next-post btn btn-default" title='vue使用rem适配移动端'>
+        <a href="/archives/56097.html" class="next-post btn btn-default" title='python简单例子'>
             <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">vue使用rem适配移动端</span><i class="fa fa-angle-right fa-fw"></i>
+            <span class="hidden-xs">python简单例子</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
     
 </div>

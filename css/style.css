@@ -653,9 +653,9 @@ pre {
   padding: 0;
 }
 .post-content code {
-  color: #f3b223;
+  color: #3c3434;
   font-size: 0.96em;
-  background-color: #1d1f21;
+  background-color: #e8e8e8;
   padding: 1px 8px;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -1165,7 +1165,7 @@ pre,
   padding: 0;
   color: #c5c8c6;
   font-size: 13px;
-  background: #1d1f21;
+  background: #3a3c3e;
   line-height: 1.6;
 }
 code {
@@ -1189,7 +1189,7 @@ pre .meta {
   color: #c250e4;
 }
 pre .comment {
-  color: #747474;
+  color: slategray;
 }
 .highlight {
   -webkit-border-radius: 1px;
@@ -1228,13 +1228,13 @@ pre .comment {
   padding-right: 10px;
   color: #888f96;
   text-align: right;
-  background-color: #000;
+  background-color: #2b2b2b;
 }
 .highlight .code pre {
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #1d1f21;
+  background-color: #3a3c3e;
 }
 .highlight .line {
   height: 20px;
@@ -1272,7 +1272,7 @@ pre .literal,
 pre .params,
 pre .constant,
 pre .command {
-  color: #f3b223;
+  color: #a6e22e;
 }
 pre .ruby .class .title,
 pre .css .rules .attribute,
@@ -1285,7 +1285,7 @@ pre .xml .cdata,
 pre .special,
 pre .number,
 pre .formula {
-  color: #a6e224;
+  color: #ae81ff;
 }
 pre .title,
 pre .css .hexcolor {
@@ -1303,7 +1303,7 @@ pre .coffeescript .title {
 }
 pre .keyword,
 pre .javascript .function {
-  color: #07c3b2;
+  color: #66d9ef;
 }
 /*====================================================
     media

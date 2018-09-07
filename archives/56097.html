@@ -1,0 +1,346 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Start Here">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://sweida.github.io">
+    <!--SEO-->
+
+<meta name="description" content="个人技术学习分享博客，前端技术分享"/>
+
+
+
+<meta name="keywords" content="技术博客,前端技术"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>python简单例子 | Start Here</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.png">
+
+    
+
+
+    <link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background:url(../../img/banner.jpg) 0 -470px;background-size:100%;"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='施伟达'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 人生若只如初见 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/前端"><i class="fa "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/后端"><i class="fa "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工具"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/myGitbook"><i class="fa "></i>Gitbook</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/vip"><i class="fa "></i>vip视频</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="python简单例子">
+            
+	            python简单例子
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/后端">
+            后端
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/python" title='python'>
+                        python
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/09/07</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="python-简易猜数字游戏"><a href="#python-简易猜数字游戏" class="headerlink" title="python 简易猜数字游戏"></a>python 简易猜数字游戏</h3><p>用户可以一直猜，每猜一次都要重复运行一次程序，直到猜对为止。 这巧妙地阐述了 while 语句的用法。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">number = <span class="number">23</span></span><br><span class="line">running = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> running:</span><br><span class="line">    guess = int(input(<span class="string">'Enter an integer : '</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> guess == number:</span><br><span class="line">        print(<span class="string">'Congratulations, you guessed it.'</span>)</span><br><span class="line">        <span class="comment"># 这会导致 while 循环停止</span></span><br><span class="line">        running = <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">elif</span> guess &lt; number:</span><br><span class="line">        print(<span class="string">'No, it is a little higher than that.'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'No, it is a little lower than that.'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'The while loop is over.'</span>)</span><br><span class="line">    <span class="comment"># 你可以在此处继续进行其它你想做的操作</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'Done'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>输出<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ python <span class="keyword">while</span>.py</span><br><span class="line">Enter an integer : <span class="number">50</span></span><br><span class="line">No, it <span class="keyword">is</span> a little lower than that.</span><br><span class="line">Enter an integer : <span class="number">22</span></span><br><span class="line">No, it <span class="keyword">is</span> a little higher than that.</span><br><span class="line">Enter an integer : <span class="number">23</span></span><br><span class="line">Congratulations, you guessed it.</span><br><span class="line">The <span class="keyword">while</span> loop <span class="keyword">is</span> over.</span><br><span class="line">Done</span><br></pre></td></tr></table></figure></p>
+<p><code>else</code>语句块会在 <code>while</code> 循环的条件变为 <code>False</code> 时执行——甚至有可能在第一次检查条件时，条件就是 <code>False</code> 。如果 <code>while</code> 循环中有一个 <code>else</code> 从句，它总是会执行到，除非用 <code>break</code> 语句跳出循环。</p>
+<p>我们将<code>True</code> 和 <code>False</code> 称为布尔类型，而且你可以认为它们分别等于数值 <code>1</code> 和 <code>0</code> 。</p>
+<h3 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a>for 循环</h3><p><code>for..in</code> 语句是另一种循环语句，它会 迭代 对象序列，即会遍历序列中的的每个项。在后面的章节中，我们将详细了解 序列 。目前你只需要知道的是，序列只是一个有序的项的集合。<br>示例（保存为 for.py）：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">5</span>):</span><br><span class="line">    print(i)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'The for loop is over'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ python <span class="keyword">for</span>.py</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line">The <span class="keyword">for</span> loop <span class="keyword">is</span> over</span><br></pre></td></tr></table></figure></p>
+<h3 id="查找字符串"><a href="#查找字符串" class="headerlink" title="查找字符串"></a>查找字符串</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这是一个字符串对象</span></span><br><span class="line">name = <span class="string">'Swaroop'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> name.startswith(<span class="string">'Swa'</span>):</span><br><span class="line">    print(<span class="string">'Yes, the string starts with "Swa"'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="string">'a'</span> <span class="keyword">in</span> name:</span><br><span class="line">    print(<span class="string">'Yes, it contains the string "a"'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> name.find(<span class="string">'war'</span>) != <span class="number">-1</span>:</span><br><span class="line">    print(<span class="string">'Yes, it contains the string "war"'</span>)</span><br><span class="line"></span><br><span class="line">delimiter = <span class="string">'_*_'</span></span><br><span class="line">mylist = [<span class="string">'Brazil'</span>, <span class="string">'Russia'</span>, <span class="string">'India'</span>, <span class="string">'China'</span>]</span><br><span class="line">print(delimiter.join(mylist))</span><br></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ python ds_str_methods.py</span><br><span class="line">Yes, the string starts <span class="keyword">with</span> <span class="string">"Swa"</span></span><br><span class="line">Yes, it contains the string <span class="string">"a"</span></span><br><span class="line">Yes, it contains the string <span class="string">"war"</span></span><br><span class="line">Brazil_*_Russia_*_India_*_China</span><br></pre></td></tr></table></figure></p>
+<h3 id="模块的-name"><a href="#模块的-name" class="headerlink" title="模块的 __name__"></a>模块的 <code>__name__</code></h3><p>每一个模块都有一个名称，在模块中我们可以通过判断语句来确定模块的名称。这在一种情形下特别有用：确定模块被导入了？还是在独立的运行。如之前提到过的，当模块第一次被导入的时候，模块的代码将被执行。<br>我们可以通过这一点，<strong>让模块在被导入和独立运行时执行不同的操作</strong>。通过模块的 <code>__name__</code> 属性可以实现这个功能。</p>
+<p>示例（另存为 module_using_name.py）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    print(&apos;我是自己运行时显示&apos;)</span><br><span class="line">else:</span><br><span class="line">    print(&apos;我是在被import时显示的&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ python module_using_name.py</span><br><span class="line">我是自己运行时显示</span><br><span class="line"></span><br><span class="line">$ python</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> module_using_name</span><br><span class="line">我是在被<span class="keyword">import</span>时显示的</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>代码是如何工作的？</p>
+<p>每一个 <code>Python</code> 模块都定义了各自的 <code>__name__</code>。如果其值为 <code>__main__</code>，这说明用户正在单独运行这个模块，这时我们可以进行合适的操作</p>
+<h3 id="init-方法"><a href="#init-方法" class="headerlink" title="__init__ 方法"></a><code>__init__</code> 方法</h3><p>对 <code>Python</code> 类来说，许多方法名有特别的重要性。现在，我们来考察一个重要的 <code>__init__</code> 方法。</p>
+<p><code>__init__</code> 方法将在类的对象被初始化（也就是创建）的时候自动的调用。这个方法将按照你的想法 初始化 对象（通过给对象传递初始值）。请注意这个名字的开头和结束都是双下划线。</p>
+<p>例子（保存为文件  oop_init.py ）：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">say_hi</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Hello, my name is'</span>, self.name)</span><br><span class="line"></span><br><span class="line">p = Person(<span class="string">'Swaroop'</span>)</span><br><span class="line">p.say_hi()</span><br><span class="line"><span class="comment"># 上面两行也可以写成下面这种形式</span></span><br><span class="line"><span class="comment"># Person('Swaroop').say_hi()</span></span><br></pre></td></tr></table></figure></p>
+<p>输出<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python oop_init.py</span><br><span class="line">Hello, my name <span class="keyword">is</span> Swaroop</span><br></pre></td></tr></table></figure></p>
+<p>这是如何工作的</p>
+<p>这里，我们定义了 <code>__init__</code> 方法。这个方法除了通常的 <code>self</code> 变量之外，还有一个参数 <code>name</code> 。 这里我们创建了一个新的也叫做 <code>name</code> 的域。注意这里有两个不同的变量却都被叫做 <code>name</code> 。这是没有问题的，因为带点的标记 <code>self.name</code> 表示有一个叫做 <code>name</code> 的域是这个类的一部分，而另外一个  <code>name</code> 是一个局部变量。这里我们显式地指出使用哪个变量，因此没有任何冲突。</p>
+<p>当新建一个新的 <code>Person</code> 类的实例 <code>p</code> 的时候，我们通过调用类名的方式来创建这个新的实例，在紧跟着的括号中填入初始化参数： <code>p = Person(&#39;Swaroop&#39;)</code> 。</p>
+<p>我们没有显式的调用 <code>__init__</code> 这个方法，这是这个方法特殊之处。</p>
+<p>正如 <code>say_hi</code> 方法所示的，现在我们在我们的方法之中可以使用 <code>self.name</code> 这个域了。</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="javascript:;">sweida</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/archives/55006.html" class="pre-post btn btn-default" title='python保存json文件并输出中文'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">python保存json文件并输出中文</span>
+        </a>
+    
+    
+        <a href="/archives/30997.html" class="next-post btn btn-default" title='win7彻底隐藏文件夹'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">win7彻底隐藏文件夹</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!-- <script type="text/javascript" src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        owner:"sweida",
+        repo:"sweida.github.io",
+        oauth: {
+          client_id:"9a486808f778b7b4eac8",
+          client_secret:"78226662fa23e0991de5a220a2e2a233f43cae87"
+        },
+        perPage:"10",
+    });
+    gitment.render('comments');
+</script>
+
+<style media="screen">
+.gitment-footer-container{
+  display: none;
+}
+.gitment-comment-main::before {
+  border-right-color: #7EA4CA;
+}
+/* .gitment-comment-main,
+.gitment-editor-main,
+.gitment-editor-header {
+  border: 1px solid #e67e22;
+}
+.gitment-editor-tab.gitment-selected{
+  border: none;
+}
+.gitment-editor-main::before, .gitment-comment-main::before {
+  border-right-color: #e67e22;
+} */
+
+</style>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#多个视频文件或文本文档合并成一个文件"><span class="toc-text">多个视频文件或文本文档合并成一个文件</span></a></li></ol>
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--<a id="toc-btn">
+    <i class="fa fa-bars"></i>
+</a>-->
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>&copy; 2017-2018 <a href="//github.com/sweida" class="copyright-links" target="_blank" rel="nofollow">sweida</a> 强力驱动
+                </span> |
+                <span>
+                  备案：不存在的！
+                    <!-- 由 <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a> 强力驱动 -->
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>
