@@ -9,7 +9,7 @@ tags:
 ---
 
 ### 连接数据库
-Laravel中数据库配置文件为`config/database.php`，打开该文件，默认内容如下,修改mysql对应值，
+Laravel中数据库配置文件为`config/database.php`，打开该文件，默认内容如下,不需要修改这里的:
 
 ```php
 <?php
@@ -32,9 +32,9 @@ return [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'laraveldb'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'root'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -58,10 +58,10 @@ LOG_CHANNEL=stack
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=laraveldb
-DB_USERNAME=root
-DB_PASSWORD=root
+DB_PORT=3306           // 端口号
+DB_DATABASE=laraveldb  // 数据库名
+DB_USERNAME=root       // 用户名
+DB_PASSWORD=root       // 数据库密码
 ```
 * 注：执行migration时, 如果报了这个错误 `could not find driver`
 需要允许pdo扩展，需要将php安装文件`php.ini`文件中将`pdo_mysql`这一行前的分号删除。
