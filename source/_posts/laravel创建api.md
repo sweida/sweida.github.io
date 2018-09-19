@@ -8,7 +8,16 @@ tags:
   - PHP
 ---
 
+### 修改laravel默认时区
+laravel 和 php 一样 默认的是英国的格林尼治时间 和我们相差大概8小时
+laravel 框架其实 内置了设置时区的方式
+打开 `config` 下的 `app.php` 找到 `timezone`
 
+```
+'timezone' => 'UTC',
+# 修改成
+'timezone' => 'PRC',
+```
 
 ### 数据库操作之 - Eloquent ORM
 
