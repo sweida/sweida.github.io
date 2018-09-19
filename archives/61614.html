@@ -31,7 +31,7 @@
     <!--Title-->
 
 
-<title>手机访问PC网站自动跳转到手机版 | Start Here</title>
+<title>laravel创建api | Start Here</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
@@ -144,9 +144,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="手机访问PC网站自动跳转到手机版">
+        <h1 id="laravel创建api">
             
-	            手机访问PC网站自动跳转到手机版
+	            laravel创建api
             
         </h1>
         <div class="post-meta">
@@ -154,8 +154,8 @@
     
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/前端">
-            前端
+        <a href="/categories/后端">
+            后端
         </a>
     </span>
     
@@ -165,8 +165,12 @@
         <span class="tags-meta">
             
                 
-                    <a href="/tags/JavaScript" title='JavaScript'>
-                        JavaScript
+                    <a href="/tags/PHP" title='PHP'>
+                        PHP
+                    </a>
+                
+                    <a href="/tags/laravel" title='laravel'>
+                        laravel
                     </a>
                 
             
@@ -178,7 +182,7 @@
         
         <span class="fa-wrap">
             <i class="fa fa-clock-o"></i>
-            <span class="date-meta">2018/06/14</span>
+            <span class="date-meta">2018/09/18</span>
         </span>
     
 </div>
@@ -188,7 +192,12 @@
     </div>
     
     <div class="post-body post-content">
-        <p>手机访问PC网站自动跳转到手机版，在body下面添加下面代码<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript">  <span class="keyword">try</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> urlhash = <span class="built_in">window</span>.location.hash</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">if</span> (!urlhash.match(<span class="string">'fromapp'</span>)) &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">if</span> (navigator.userAgent.match(<span class="regexp">/(iPhone|iPod|Android|ios|iPad)/i</span>)) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>.location = <span class="string">'你的手机版地址'</span></span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="actionscript">  <span class="keyword">catch</span> (err) &#123;&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+        <h3 id="修改laravel默认时区"><a href="#修改laravel默认时区" class="headerlink" title="修改laravel默认时区"></a>修改laravel默认时区</h3><p>laravel 和 php 一样 默认的是英国的格林尼治时间 和我们相差大概8小时<br>laravel 框架其实 内置了设置时区的方式<br>打开 <code>config</code> 下的 <code>app.php</code> 找到 <code>timezone</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'timezone'</span> =&gt; <span class="string">'UTC'</span>,</span><br><span class="line"><span class="comment"># 修改成</span></span><br><span class="line"><span class="string">'timezone'</span> =&gt; <span class="string">'PRC'</span>,</span><br></pre></td></tr></table></figure>
+<h3 id="数据库操作之-Eloquent-ORM"><a href="#数据库操作之-Eloquent-ORM" class="headerlink" title="数据库操作之 - Eloquent ORM"></a>数据库操作之 - Eloquent ORM</h3><p>模型的建立及查询数据</p>
+<p>简介：laravel所自带的Eloquent ORM 是一个ActiveRecord实现，用于数据库操作。每个数据表都有一个与之对应的模型，用于数据表交互。</p>
+<p>创建模块model<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">php</span> <span class="selector-tag">artisan</span> <span class="selector-tag">make</span><span class="selector-pseudo">:model</span> <span class="selector-tag">User</span></span><br></pre></td></tr></table></figure></p>
+<p>mysql添加数据库<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">users</span> (username, <span class="string">`password`</span>) <span class="keyword">value</span>(<span class="string">'佟丽娅'</span>, <span class="string">'123456'</span>)</span><br></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -206,15 +215,10 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/archives/53055.html" class="pre-post btn btn-default" title='Gitment：使用 GitHub Issues 搭建评论系统'>
-            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">Gitment：使用 GitHub Issues 搭建评论系统</span>
-        </a>
     
-    
-        <a href="/archives/16016.html" class="next-post btn btn-default" title='Javascript中数组的迭代方法'>
+        <a href="/archives/42085.html" class="next-post btn btn-default" title='laravel连接数据库mysql与创建数据库表'>
             <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">Javascript中数组的迭代方法</span><i class="fa fa-angle-right fa-fw"></i>
+            <span class="hidden-xs">laravel连接数据库mysql与创建数据库表</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
     
 </div>
