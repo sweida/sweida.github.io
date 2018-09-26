@@ -31,7 +31,7 @@
     <!--Title-->
 
 
-<title>手机访问PC网站自动跳转到手机版 | Start Here</title>
+<title>云服务器创建及php环境搭建 | Start Here</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
@@ -144,9 +144,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="手机访问PC网站自动跳转到手机版">
+        <h1 id="云服务器创建及php环境搭建">
             
-	            手机访问PC网站自动跳转到手机版
+	            云服务器创建及php环境搭建
             
         </h1>
         <div class="post-meta">
@@ -154,8 +154,8 @@
     
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/前端">
-            前端
+        <a href="/categories/工具">
+            工具
         </a>
     </span>
     
@@ -165,8 +165,8 @@
         <span class="tags-meta">
             
                 
-                    <a href="/tags/JavaScript" title='JavaScript'>
-                        JavaScript
+                    <a href="/tags/服务器搭建" title='服务器搭建'>
+                        服务器搭建
                     </a>
                 
             
@@ -178,7 +178,7 @@
         
         <span class="fa-wrap">
             <i class="fa fa-clock-o"></i>
-            <span class="date-meta">2018/06/14</span>
+            <span class="date-meta">2018/09/26</span>
         </span>
     
 </div>
@@ -188,7 +188,14 @@
     </div>
     
     <div class="post-body post-content">
-        <p>手机访问PC网站自动跳转到手机版，在body下面添加下面代码<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript">  <span class="keyword">try</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> urlhash = <span class="built_in">window</span>.location.hash</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">if</span> (!urlhash.match(<span class="string">'fromapp'</span>)) &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">if</span> (navigator.userAgent.match(<span class="regexp">/(iPhone|iPod|Android|ios|iPad)/i</span>)) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>.location = <span class="string">'你的手机版地址'</span></span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="actionscript">  <span class="keyword">catch</span> (err) &#123;&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+        <p>云服务最好选择linux Centos 6.x系统，创建后，默认用户 <code>root</code>，设置默认密码</p>
+<p>推荐使用 <code>MobaXterm</code> (类似工具xshell, putty) 工具连接云服务器。输入服务器公网IP，默认端口22，输入刚刚设置的用户名 <code>root</code> 和密码，显示界面如下(<code>MobaXterm</code>可以保存用户密码，下次登陆输入 <code>root</code> 即可自动登陆用户 <code>root</code>)<br><img src="/archives/51805/001.png" alt="001"></p>
+<h3 id="安装php环境"><a href="#安装php环境" class="headerlink" title="安装php环境"></a>安装php环境</h3><p>lanmp一键安装包安装<br>官网：<a href="https://www.wdlinux.cn/wdcp/install.html" target="_blank" rel="noopener">https://www.wdlinux.cn/wdcp/install.html</a></p>
+<h3 id="安装方法一"><a href="#安装方法一" class="headerlink" title="安装方法一"></a>安装方法一</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://dl.wdlinux.cn/lanmp_laster.tar.gz</span><br><span class="line">tar zxvf lanmp_laster.tar.gz</span><br><span class="line">sh lanmp.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载(注意备份数据,否则后果自负)</span></span><br><span class="line">sh install.sh uninstall</span><br></pre></td></tr></table></figure>
+<p>默认安装N+A的引擎组合</p>
+<h3 id="安装方法二"><a href="#安装方法二" class="headerlink" title="安装方法二"></a>安装方法二</h3><p>RPM包安装 RPM包安装软件版本较老，建议使用源码安装更新的版本<br>分别运行下面2行命令即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget http://down.wdlinux.cn/<span class="keyword">in</span>/lanmp_wdcp_ins.sh</span><br><span class="line"><span class="comment"># wget 是下载的意思</span></span><br><span class="line">sh lanmp_wdcp_ins.sh</span><br><span class="line"><span class="comment"># sh 是执行lanmp_wdcp_ins.sh文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载 (切记备份好数据)</span></span><br><span class="line">sh lanmp_wdcp_ins.sh uninstall</span><br></pre></td></tr></table></figure></p>
+<p>然后就可以了，在浏览器打开云服务器的公网ip <code>114.116.72.19</code> 就可以看的界面了，默认端口是8080，<code>114.116.72.19:8080</code> 打开操作界面，<br><img src="/archives/51805/002.png" alt="002"></p>
+<p>默认安装php版本是5.2，安装php新版本的方法<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://down.wdlinux.cn/<span class="keyword">in</span>/phps.sh</span><br><span class="line"></span><br><span class="line">sh phps.sh 7.1.4</span><br><span class="line"><span class="comment"># 即可安装7.1.4</span></span><br><span class="line"><span class="comment"># (共支持7个版本的PHP，如5.2.17/5.3.29/5.4.45/5.5.38/5.6.30/7.0.18/7.1.4)</span></span><br></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -206,15 +213,10 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/archives/53055.html" class="pre-post btn btn-default" title='Gitment：使用 GitHub Issues 搭建评论系统'>
-            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">Gitment：使用 GitHub Issues 搭建评论系统</span>
-        </a>
     
-    
-        <a href="/archives/16016.html" class="next-post btn btn-default" title='Javascript中数组的迭代方法'>
+        <a href="/archives/61614.html" class="next-post btn btn-default" title='laravel创建api'>
             <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">Javascript中数组的迭代方法</span><i class="fa fa-angle-right fa-fw"></i>
+            <span class="hidden-xs">laravel创建api</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
     
 </div>
