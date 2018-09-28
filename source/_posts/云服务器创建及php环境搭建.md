@@ -5,12 +5,18 @@ date: 2018-09-26 16:31:08
 tags:
   - 服务器搭建
 categories: 工具
+img: archives/51805/001.png
 ---
 
 云服务最好选择linux Centos 6.x系统，创建后，默认用户 `root`，设置默认密码
-
+![000](51805/000.png)
 推荐使用 `MobaXterm` (类似工具xshell, putty) 工具连接云服务器。输入服务器公网IP，默认端口22，输入刚刚设置的用户名 `root` 和密码，显示界面如下(`MobaXterm`可以保存用户密码，下次登陆输入 `root` 即可自动登陆用户 `root`)
 ![001](51805/001.png)
+
+### 添加端口号
+默认是没有开启端口号的，需要去 `安全组` 里吧几个常用的端口号添加上(8080, 80, 有多个站点也需要设置多个端口号)
+添加后
+![004](51805/004.png)
 
 ### 安装linux面板，选择宝塔
 官网：[https://www.bt.cn/download/linux.html](https://www.bt.cn/download/linux.html)
