@@ -200,10 +200,143 @@
 </ul>
 <h3 id="创建数据库表"><a href="#创建数据库表" class="headerlink" title="创建数据库表"></a>创建数据库表</h3><p>设计数据库 使用migration<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan <span class="built_in">make</span>:migration create_table_users --<span class="keyword">create</span>=users</span><br></pre></td></tr></table></figure></p>
 <p>migration users文件up方法<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// create_table_users.php</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Schema::create(<span class="string">'users'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</span><br><span class="line">        $table-&gt;increments(<span class="string">'id'</span>);</span><br><span class="line">        $table-&gt;string(<span class="string">'username'</span>)-&gt;unique();</span><br><span class="line">        $table-&gt;string(<span class="string">'email'</span>)-&gt;unique()-&gt;nullable();</span><br><span class="line">        $table-&gt;string(<span class="string">'phone'</span>)-&gt;unique()-&gt;nullable();</span><br><span class="line">        $table-&gt;string(<span class="string">'password'</span>);</span><br><span class="line">        $table-&gt;text(<span class="string">'intro'</span>)-&gt;nullable();</span><br><span class="line">        $table-&gt;timestamps();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>查看执行运行结果，如果没报错再执行添加表<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan migrate <span class="comment">--pretend</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="可用的列类型"><a href="#可用的列类型" class="headerlink" title="可用的列类型"></a>可用的列类型</h3><p>模式构建器包含您在构建表时可能指定的各种列类型：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$table-&gt;boolean(&#39;confirmed&#39;);</code></td>
+<td>BOOLEAN等效列。</td>
+</tr>
+<tr>
+<td><code>$table-&gt;char(&#39;name&#39;, 100);</code></td>
+<td>CHAR等效列，可选长度。</td>
+</tr>
+<tr>
+<td><code>$table-&gt;date(&#39;created_at&#39;);</code></td>
+<td>DATE等效列。</td>
+</tr>
+<tr>
+<td><code>$table-&gt;float(&#39;amount&#39;, 8, 2);</code></td>
+<td>FLOAT等效列，具有精度（总位数）和刻度（十进制数字）。</td>
+</tr>
+<tr>
+<td><code>$table-&gt;increments(&#39;id&#39;);</code></td>
+<td>自动递增UNSIGNED INTEGER（主键）等效列。</td>
+</tr>
+<tr>
+<td><code>$table-&gt;ipAddress(&#39;visitor&#39;);</code></td>
+<td>IP地址等效列。</td>
+</tr>
+<tr>
+<td><code>$table-&gt;json(&#39;options&#39;);</code></td>
+<td>JSON等效列。</td>
+</tr>
+<tr>
+<td><code>$table-&gt;longText(&#39;description&#39;);</code></td>
+<td>LONGTEXT等效列。</td>
+</tr>
+<tr>
+<td><code>$table-&gt;string(&#39;name&#39;, 100);</code></td>
+<td>VARCHAR等效列，可选长度。</td>
+</tr>
+<tr>
+<td><code>$table-&gt;text(&#39;description&#39;);</code></td>
+<td>TEXT等效列。</td>
+</tr>
+<tr>
+<td><code>$table-&gt;time(&#39;sunrise&#39;);</code></td>
+<td>TIME等效列。</td>
+</tr>
+<tr>
+<td><code>$table-&gt;timestamps();</code></td>
+<td>添加<code>created_at</code>和<code>updated_at</code>等效列。</td>
+</tr>
+<tr>
+<td><code>$table-&gt;year(&#39;birth_year&#39;);</code></td>
+<td>YEAR等效列。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="列修饰符"><a href="#列修饰符" class="headerlink" title="列修饰符"></a>列修饰符</h3><p>在向数据库表添加列时可以使用多个列“修饰符”。例如，要使列“可为空”，您可以使用以下nullable方法：<br>下面是所有可用列修饰符的列表。此列表不包括索引修饰符：</p>
+<table>
+<thead>
+<tr>
+<th>修改</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-&gt;unique()</code></td>
+<td>唯一值</td>
+</tr>
+<tr>
+<td><code>-&gt;nullable()</code></td>
+<td>可以为空</td>
+</tr>
+<tr>
+<td><code>-&gt;nullable($value = true)</code></td>
+<td>允许（默认情况下）将<code>null</code>值插入列中</td>
+</tr>
+<tr>
+<td><code>-&gt;default($value)</code></td>
+<td>为列指定“默认”值</td>
+</tr>
+<tr>
+<td><code>-&gt;after(&#39;column&#39;)</code></td>
+<td>将列放在“另一列”之后（MySQL）</td>
+</tr>
+<tr>
+<td><code>-&gt;autoIncrement()</code></td>
+<td>将INTEGER列设置为自动增量（主键）</td>
+</tr>
+<tr>
+<td><code>-&gt;charset(&#39;utf8&#39;)</code></td>
+<td>为列指定字符集（MySQL）</td>
+</tr>
+<tr>
+<td><code>-&gt;collation(&#39;utf8_unicode_ci&#39;)</code></td>
+<td>为列指定排序规则（MySQL / SQL Server）</td>
+</tr>
+<tr>
+<td><code>-&gt;comment(&#39;my comment&#39;)</code></td>
+<td>在列中添加注释（MySQL）</td>
+</tr>
+<tr>
+<td><code>-&gt;first()</code></td>
+<td>将列“first”放在表中（MySQL）</td>
+</tr>
+<tr>
+<td><code>-&gt;storedAs($expression)</code></td>
+<td>创建存储生成的列（MySQL）</td>
+</tr>
+<tr>
+<td><code>-&gt;unsigned()</code></td>
+<td>将INTEGER列设置为UNSIGNED（MySQL）</td>
+</tr>
+<tr>
+<td><code>-&gt;useCurrent()</code></td>
+<td>设置TIMESTAMP列以使用CURRENT_TIMESTAMP作为默认值</td>
+</tr>
+<tr>
+<td><code>-&gt;virtualAs($expression)</code></td>
+<td>创建虚拟生成列（MySQL）</td>
+</tr>
+</tbody>
+</table>
+<p>查看数据库执行运行结果，如果没报错再执行添加表<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan migrate <span class="comment">--pretend</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 往表格添加字段</span></span><br><span class="line">php artisan make:migration add_votes_to_users_table --table=users</span><br></pre></td></tr></table></figure>
 <p>如果表存在，删除数据库表<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mysql --&gt;</span></span><br><span class="line">drop table users;</span><br></pre></td></tr></table></figure></p>
 <p>添加数据库表<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">php artisan migrate</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Migrating: 2018_09_18_024606_create_table_users</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Migrated:  2018_09_18_024606_create_table_users</span></span><br></pre></td></tr></table></figure></p>
 <p>添加表成功<br><img src="/archives/42085/table.png" alt="数据表"></p>
+<p>回滚迁移<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">php artisan migrate:rollback</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回滚最后五次迁移</span></span><br><span class="line">php artisan migrate:rollback <span class="attribute">--step</span>=5</span><br></pre></td></tr></table></figure></p>
+<p>重新创建整个数据<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">php artisan migrate:refresh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新创建整个数据并添加模型工厂的数据</span></span><br><span class="line">php artisan migrate:refresh --seed</span><br></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -287,7 +420,7 @@
                     <aside id="article-toc" role="navigation" class="col-md-4">
     <div class="widget">
         <h3 class="title">文章目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加端口号"><span class="toc-text">添加端口号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装linux面板，选择宝塔"><span class="toc-text">安装linux面板，选择宝塔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装解压rar文件"><span class="toc-text">安装解压rar文件</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改laravel默认时区"><span class="toc-text">修改laravel默认时区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库操作之-Eloquent-ORM"><span class="toc-text">数据库操作之 - Eloquent ORM</span></a></li></ol>
     </div>
 </aside>
 
