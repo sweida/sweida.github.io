@@ -135,11 +135,6 @@ public function up()
 php artisan migrate --pretend
 ```
 
-```bash
-# 往表格添加字段
-php artisan make:migration add_votes_to_users_table --table=users
-```
-
 如果表存在，删除数据库表
 ```
 <!-- mysql -->
@@ -165,10 +160,8 @@ php artisan migrate:rollback
 php artisan migrate:rollback --step=5
 ```
 
-重新创建整个数据
+往表格新添字段
 ```bash
-php artisan migrate:refresh
-
-# 重新创建整个数据并添加模型工厂的数据
-php artisan migrate:refresh --seed
+# 往表users新增votes字段
+php artisan make:migration add_votes_to_users_table --table=users
 ```
