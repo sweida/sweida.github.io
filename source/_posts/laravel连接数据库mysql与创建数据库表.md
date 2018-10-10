@@ -63,7 +63,7 @@ DB_DATABASE=laraveldb  // 数据库名
 DB_USERNAME=root       // 用户名
 DB_PASSWORD=root       // 数据库密码
 ```
-* 注：执行migration时, 如果报了这个错误 `could not find driver`
+* 注意：执行migration时, 如果报了这个错误 `could not find driver`
 需要允许pdo扩展，需要将php安装文件`php.ini`文件中将`pdo_mysql`这一行前的分号删除。
 
 ### 创建数据库表
@@ -129,7 +129,6 @@ public function up()
 `->useCurrent()`    | 	设置TIMESTAMP列以使用CURRENT_TIMESTAMP作为默认值
 `->virtualAs($expression)`    | 	创建虚拟生成列（MySQL）
 
-
 查看数据库执行运行结果，如果没报错再执行添加表
 ```
 php artisan migrate --pretend
@@ -164,4 +163,15 @@ php artisan migrate:rollback --step=5
 ```bash
 # 往表users新增votes字段
 php artisan make:migration add_votes_to_users_table --table=users
+```
+
+### 注意：修改laravel默认时区
+laravel 和 php 一样 默认的是英国的格林尼治时间 和我们相差大概8小时
+laravel 框架其实 内置了设置时区的方式
+打开 `config` 下的 `app.php` 找到 `timezone`
+
+```
+'timezone' => 'UTC',
+# 修改成
+'timezone' => 'PRC',
 ```
