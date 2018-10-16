@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Start Here">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://sweida.github.io">
+    <!--SEO-->
+
+<meta name="description" content="个人技术学习分享博客，前端技术分享"/>
+
+
+
+<meta name="keywords" content="技术博客,前端技术"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>laravel服务器部署 | Start Here</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.png">
+
+    
+
+
+    <link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background:url(../../img/banner.jpg) 0 -470px;background-size:100%;"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='施伟达'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 人生若只如初见 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/前端"><i class="fa "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/后端"><i class="fa "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工具"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/myGitbook"><i class="fa "></i>Gitbook</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/vip"><i class="fa "></i>vip视频</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="laravel服务器部署">
+            
+	            laravel服务器部署
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/后端">
+            后端
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/PHP" title='PHP'>
+                        PHP
+                    </a>
+                
+                    <a href="/tags/laravel" title='laravel'>
+                        laravel
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/10/16</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>用宝塔新建个站点 <code>laravel-blog.api</code> ，分配一个端口，登陆服务器，进入<code>www/wwwroot/laravel-blog.api</code>目录</p>
+<p>用命令行克隆<code>github</code>的项目<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">cd</span> www/wwwroot/laravel-blog.api</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/sweida/laravel.git</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> laravel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把克隆的项目移动出来根目录</span></span><br><span class="line">mv * .[^.]* ..</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后删除laravel目录</span></span><br><span class="line">rm laravel</span><br></pre></td></tr></table></figure></p>
+<p><strong>安装 Composer 并使用 Composer 安装代码依赖</strong><br>访问 <a href="https://getcomposer.org/download/" target="_blank" rel="noopener">composer</a> 官网 获取下面四行代码最新版，直接粘贴执行安装 Composer<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">php -r <span class="string">"copy('https://getcomposer.org/installer', 'composer-setup.php');"</span></span><br><span class="line">php -r <span class="string">"if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') &#123; echo 'Installer verified'; &#125; else &#123; echo 'Installer corrupt'; unlink('composer-setup.php'); &#125; echo PHP_EOL;"</span></span><br><span class="line">php composer-setup.php</span><br><span class="line">php -r <span class="string">"unlink('composer-setup.php');"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># composer.phar</span></span><br><span class="line">mv composer.phar /usr/<span class="built_in">local</span>/bin/composer</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入项目目录</span></span><br><span class="line"><span class="built_in">cd</span> /www/wwwroot/laravel-blog.api</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行 composer install</span></span><br><span class="line">composer install</span><br></pre></td></tr></table></figure></p>
+<p><strong>创建 .env 文件</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /www/wwwroot/laravel-blog.api</span><br><span class="line"></span><br><span class="line">cp .env.example .env</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据项目实际情况修改 .env 文件，修改数据库名，登录名和密码</span></span><br><span class="line">vim .env</span><br></pre></td></tr></table></figure></p>
+<p><strong>生成 laravel key</strong><br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /www/wwwroot/laravel-blog<span class="variable">.api</span></span><br><span class="line"></span><br><span class="line">php artisan key:<span class="keyword">generate</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>创建数据库，执行迁移</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先登录 mysql 创建一个对应项目的数据库，名字应该和 .env 文件中的一致</span></span><br><span class="line"><span class="built_in">cd</span> /www/wwwroot/laravel-blog.api</span><br><span class="line"></span><br><span class="line">php artisan migrate</span><br></pre></td></tr></table></figure></p>
+<p><strong>修改权限</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 把文件夹权限设置为777</span></span><br><span class="line">sudo chown -R www-data:www-data /www/wwwroot/laravel-blog.api</span><br><span class="line"></span><br><span class="line">sudo chmod -R 777 /www/wwwroot/laravel-blog.api/storage</span><br></pre></td></tr></table></figure></p>
+<h3 id="访问项目的端口号，成功进入，但是除了根’-‘目录，其它目录都是404"><a href="#访问项目的端口号，成功进入，但是除了根’-‘目录，其它目录都是404" class="headerlink" title="访问项目的端口号，成功进入，但是除了根’/‘目录，其它目录都是404"></a>访问项目的端口号，成功进入，但是除了根’/‘目录，其它目录都是404</h3><p><strong>解决方法：修改宝塔里<code>laravel-blog</code>项目的nginx配置文件</strong><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;  </span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;  </span><br><span class="line"></span><br><span class="line">    <span class="attribute">server_name</span> www.laravel.com;  </span><br><span class="line"></span><br><span class="line">    <span class="attribute">root</span> /www/wwwroot/laravel-blog.api/public/;  </span><br><span class="line">    <span class="attribute">index</span> index.html index.php index.htm;  </span><br><span class="line"></span><br><span class="line">    <span class="comment"># 添加下面3行</span></span><br><span class="line">    <span class="attribute">location</span> / &#123;  </span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.php?<span class="variable">$query_string</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> <span class="regexp">~ \.php$</span> &#123;  </span><br><span class="line">        <span class="attribute">include</span> snippets/fastcgi-php.conf;  </span><br><span class="line">    <span class="comment">#  </span></span><br><span class="line">    <span class="comment">#   # With php7.0-cgi alone:  </span></span><br><span class="line">    <span class="comment">#   fastcgi_pass 127.0.0.1:9000;  </span></span><br><span class="line">    <span class="comment">#   # With php7.0-fpm:  </span></span><br><span class="line">        <span class="attribute">fastcgi_pass</span> unix:/run/php/php7.0-fpm.sock;  </span><br><span class="line"></span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="javascript:;">sweida</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/archives/51805.html" class="next-post btn btn-default" title='云服务器创建及php环境搭建'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">云服务器创建及php环境搭建</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!-- <script type="text/javascript" src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        owner:"sweida",
+        repo:"sweida.github.io",
+        oauth: {
+          client_id:"9a486808f778b7b4eac8",
+          client_secret:"78226662fa23e0991de5a220a2e2a233f43cae87"
+        },
+        perPage:"10",
+    });
+    gitment.render('comments');
+</script>
+
+<style media="screen">
+.gitment-footer-container{
+  display: none;
+}
+.gitment-comment-main::before {
+  border-right-color: #7EA4CA;
+}
+/* .gitment-comment-main,
+.gitment-editor-main,
+.gitment-editor-header {
+  border: 1px solid #e67e22;
+}
+.gitment-editor-tab.gitment-selected{
+  border: none;
+}
+.gitment-editor-main::before, .gitment-comment-main::before {
+  border-right-color: #e67e22;
+} */
+
+</style>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加端口号"><span class="toc-text">添加端口号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装linux面板，选择宝塔"><span class="toc-text">安装linux面板，选择宝塔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装解压rar文件"><span class="toc-text">安装解压rar文件</span></a></li></ol>
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--<a id="toc-btn">
+    <i class="fa fa-bars"></i>
+</a>-->
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>&copy; 2017-2018 <a href="//github.com/sweida" class="copyright-links" target="_blank" rel="nofollow">sweida</a> 强力驱动
+                </span> |
+                <span>
+                  备案：不存在的！
+                    <!-- 由 <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a> 强力驱动 -->
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>
