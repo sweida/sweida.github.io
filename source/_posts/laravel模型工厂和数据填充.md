@@ -2,7 +2,10 @@
 title: laravel模型工厂和数据填充
 abbrlink: 37793
 date: 2018-10-22 23:10:37
+categories: 后端
 tags:
+  - laravel
+  - PHP
 ---
 
 ### 生成工厂
