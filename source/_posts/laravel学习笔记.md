@@ -28,9 +28,12 @@ composer create-project --prefer-dist laravel/laravel blog
 ```
 
 ### 本地开发服务器
-如果你在本地安装了 PHP，并且想要使用 PHP 内置的开发环境服务器为应用提供服务，可以使用 Artisan 命令 
-```
+如果你在本地安装了 PHP，并且想要使用 PHP 内置的开发环境服务器为应用提供服务，可以使用 Artisan 命令
+```bash
 php artisan serve
+
+# 指定端口号
+php artisan serve --port=7000
 ```
 该命令将会在本地启动开发环境服务器，这样在浏览器中通过 http://localhost:8000 即可访问应用：
 ![learnlaravel](22843/learnlaravel.png)
