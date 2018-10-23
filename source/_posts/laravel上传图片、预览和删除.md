@@ -46,7 +46,11 @@ http://localhost:7000/storage/ad/2018-10-24/bUGSlt805MoL4VozkEDIxtq8VoIsoK46rvLs
 ```
 
 ### 删除上传的文件
+
 ```php
+// 需要引入Storage
+use Illuminate\Support\Facades\Storage;
+
 public function delete_upload() {
     $url = 'public/ad/2018-10-24/bUGSlt805MoL4VozkEDIxtq8VoIsoK46rvLsJf7c.jpeg'
     $file = Storage::delete(rq('url'));
