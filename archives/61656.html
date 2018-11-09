@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Start Here">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://sweida.github.io">
+    <!--SEO-->
+
+<meta name="description" content="个人技术学习分享博客，前端技术分享"/>
+
+
+
+<meta name="keywords" content="技术博客,前端技术"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>python环境搭建之OpenCV | Start Here</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.png">
+
+    
+
+
+    <link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background:url(../../img/banner.jpg) 0 -470px;background-size:100%;"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='施伟达'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 人生若只如初见 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/前端"><i class="fa "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/后端"><i class="fa "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工具"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/myGitbook"><i class="fa "></i>Gitbook</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/vip"><i class="fa "></i>vip视频</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="python环境搭建之OpenCV">
+            
+	            python环境搭建之OpenCV
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/后端">
+            后端
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/python" title='python'>
+                        python
+                    </a>
+                
+                    <a href="/tags/CV" title='CV'>
+                        CV
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/11/08</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="openCV介绍"><a href="#openCV介绍" class="headerlink" title="openCV介绍"></a>openCV介绍</h3><p>Open Source Computer Vision Library.OpenCV于1999年由Intel建立，如今由Willow Garage提供支持。OpenCV是一个基于BSD许可（开源）发行的跨平台计算机视觉库，可以运行在Linux、Windows、MacOS操作系统上。它轻量级而且高效——由一系列 C 函数和少量C++类构成，同时提供了Python、Ruby、MATLAB等语言的接口，实现了图像处理和计算机视觉方面的很多通用算法。最新版本是3.3 ，2017年8月3日发布。</p>
+<p><strong>优势–为什么有OpenCV</strong></p>
+<p>计算机视觉市场巨大而且持续增长，且这方面没有标准API，如今的计算机视觉软件大概有以下三种：</p>
+<ol>
+<li>研究代码（慢，不稳定，独立并与其他库不兼容）</li>
+<li>耗费很高的商业化工具（比如Halcon, MATLAB+Simulink）</li>
+<li>依赖硬件的一些特别的解决方案（比如视频监控，制造控制系统，医疗设备）这是如今的现状，而标准的API将简化计算机视觉程序和解决方案的开发，OpenCV致力于成为这样的标准API。</li>
+</ol>
+<p>OpenCV致力于真实世界的实时应用，通过优化的C代码的编写对其执行速度带来了可观的提升，并且可以通过购买Intel的IPP高性能多媒体函数库（Integrated Performance Primitives）得到更快的处理速度。右图为OpenCV与当前其他主流视觉函数库的性能比较。</p>
+<p><strong>应用领域编辑</strong></p>
+<ul>
+<li>人机互动</li>
+<li>物体识别</li>
+<li>图像分割</li>
+<li>人脸识别</li>
+<li>动作识别</li>
+<li>运动跟踪</li>
+<li>机器人</li>
+<li>运动分析</li>
+<li>机器视觉</li>
+<li>结构分析</li>
+<li>汽车安全驾驶</li>
+</ul>
+<p>简言之，通过openCV可实现计算机图像、视频的编辑。广泛应用于图像识别、运动跟踪、机器视觉等领域。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>一切就绪以后以管理员身份运行cmd或PowerShell。依次输入以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade setuptools</span><br><span class="line"></span><br><span class="line">pip install numpy Matplotlib</span><br><span class="line"></span><br><span class="line">pip install opencv-python</span><br></pre></td></tr></table></figure>
+<p>opencv环境已经整好，就是这么简单。只需要numpy、Matplotlib、opencv-python三个包，都不大很快就可以下好，如果下载中间出现error或wrong，重新输入命令即可。</p>
+<blockquote>
+<p>如果多次下载失败，可以从 <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank" rel="noopener">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a> 直接下载whl包安装，安装whl包依然使用pip</p>
+</blockquote>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">pip</span> <span class="selector-tag">install</span> 包的位置(如：<span class="attribute">E</span>:\download\xxx.whl)</span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>写.py脚本:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入cv模块</span></span><br><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="comment">#读取图像，支持 bmp、jpg、png、tiff 等常用格式</span></span><br><span class="line">img = cv.imread(<span class="string">r"E:\python\test.jpg"</span>)</span><br><span class="line"><span class="comment">#创建窗口并显示图像</span></span><br><span class="line">cv.namedWindow(<span class="string">"Image"</span>)</span><br><span class="line">cv.imshow(<span class="string">"Image"</span>,img)</span><br><span class="line">cv.waitKey(<span class="number">0</span>)</span><br><span class="line"><span class="comment">#释放窗口</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p>运行以上脚本，如果可以显示出测试的图像，则环境搭建成功</p>
+<p>opencv的学习，推荐网站<a href="www.opencv.org.cn">www.opencv.org.cn</a>，是中文的教程哦！</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="javascript:;">sweida</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/archives/19984.html" class="pre-post btn btn-default" title='ffmpeg视音频编解码入门'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">ffmpeg视音频编解码入门</span>
+        </a>
+    
+    
+        <a href="/archives/47459.html" class="next-post btn btn-default" title='laravel上传图片、预览和删除'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">laravel上传图片、预览和删除</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!-- <script type="text/javascript" src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        owner:"sweida",
+        repo:"sweida.github.io",
+        oauth: {
+          client_id:"9a486808f778b7b4eac8",
+          client_secret:"78226662fa23e0991de5a220a2e2a233f43cae87"
+        },
+        perPage:"10",
+    });
+    gitment.render('comments');
+</script>
+
+<style media="screen">
+.gitment-footer-container{
+  display: none;
+}
+.gitment-comment-main::before {
+  border-right-color: #7EA4CA;
+}
+/* .gitment-comment-main,
+.gitment-editor-main,
+.gitment-editor-header {
+  border: 1px solid #e67e22;
+}
+.gitment-editor-tab.gitment-selected{
+  border: none;
+}
+.gitment-editor-main::before, .gitment-comment-main::before {
+  border-right-color: #e67e22;
+} */
+
+</style>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#访问项目的端口号，成功进入，但是除了根’-‘目录，其它目录都是404"><span class="toc-text">访问项目的端口号，成功进入，但是除了根’/‘目录，其它目录都是404</span></a></li></ol>
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--<a id="toc-btn">
+    <i class="fa fa-bars"></i>
+</a>-->
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>&copy; 2017-2018 <a href="//github.com/sweida" class="copyright-links" target="_blank" rel="nofollow">sweida</a> 强力驱动
+                </span> |
+                <span>
+                  备案：不存在的！
+                    <!-- 由 <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a> 强力驱动 -->
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Start Here">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://sweida.github.io">
+    <!--SEO-->
+
+<meta name="description" content="个人技术学习分享博客，前端技术分享"/>
+
+
+
+<meta name="keywords" content="技术博客,前端技术"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>ffmpeg视音频编解码入门 | Start Here</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.png">
+
+    
+
+
+    <link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background:url(../../img/banner.jpg) 0 -470px;background-size:100%;"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='施伟达'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 人生若只如初见 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/前端"><i class="fa "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/后端"><i class="fa "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工具"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/myGitbook"><i class="fa "></i>Gitbook</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/vip"><i class="fa "></i>vip视频</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="ffmpeg视音频编解码入门">
+            
+	            ffmpeg视音频编解码入门
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/工具">
+            工具
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/ffmpeg" title='ffmpeg'>
+                        ffmpeg
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/11/09</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="FFmpeg项目由以下几部分组成"><a href="#FFmpeg项目由以下几部分组成" class="headerlink" title="FFmpeg项目由以下几部分组成"></a><code>FFmpeg</code>项目由以下几部分组成</h3><ul>
+<li>FFmpeg视频文件转换命令行工具,也支持经过实时电视卡抓取和编码成视频文件；</li>
+<li>ffserver基于HTTP、RTSP用于实时广播的多媒体服务器.也支持时间平移；</li>
+<li>ffplay用 SDL和FFmpeg库开发的一个简单的媒体播放器；</li>
+<li>libavcodec一个包含了所有FFmpeg音视频编解码器的库。为了保证最优性能和高可复用性，大多数编解码器从头开发的；</li>
+<li>libavformat一个包含了所有的普通音视格式的解析器和产生器的库。</li>
+</ul>
+<p>使用FFMPEG作为内核视频播放器：<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mplayer，ffplay，射手播放器，暴风影音，KMPlayer，QQ影音...</span><br></pre></td></tr></table></figure></p>
+<p>使用FFMPEG作为内核的Directshow Filter：<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffdshow，lav filters...</span><br></pre></td></tr></table></figure></p>
+<p>使用FFMPEG作为内核的转码工具：<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg，格式工厂...</span><br></pre></td></tr></table></figure></p>
+<p>事实上，FFMPEG的视音频编解码功能确实太强大了，几乎囊括了现存所有的视音频编码标准，因此只要做视音频开发，几乎离不开它。</p>
+<p><a href="http://ffmpeg.org/" target="_blank" rel="noopener">官网</a></p>
+<p><a href="https://ffmpeg.zeranoe.com/builds/" target="_blank" rel="noopener">下载地址</a></p>
+<blockquote>
+<p>下载完成后把 <code>bin</code> 添加到全局变量</p>
+</blockquote>
+<p>1 ffmpeg.exe<br>ffmpeg是用于转码的应用程序。</p>
+<p>一个简单的转码命令可以这样写：</p>
+<p>将input.avi转码成output.ts，并设置视频的码率为640kbps<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.avi -b:v 640k output.ts</span><br></pre></td></tr></table></figure></p>
+<p>2 ffplay.exe<br>ffplay是用于播放的应用程序。</p>
+<p>一个简单的播放命令可以这样写：</p>
+<p>播放test.avi<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffplay test.avi</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li>使用命令 ffmpeg -i http://…m3u8 -c copy out.mkv 将视频流下载并合并成 out.mkv。</li>
+</ol>
+<h3 id="ffmpeg-的一些参数"><a href="#ffmpeg-的一些参数" class="headerlink" title="ffmpeg 的一些参数"></a><code>ffmpeg</code> 的一些参数</h3><p>基本使用方式：ffmpeg [[options][`-i’ input_file]] {[options] output_file} </p>
+<p>a) 通用选项<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -h 帮助，查看所有参数说明</span><br><span class="line">-<span class="ruby">i filename 输入文件 </span></span><br><span class="line"><span class="ruby">-b bitrate 设置比特率，缺省<span class="number">200</span>kb/s </span></span><br><span class="line"><span class="ruby">-ss position 搜索到指定的时间 [-]<span class="symbol">hh:</span><span class="symbol">mm:</span>ss[.xxx]的格式也支持。使用-ss参数的作用，可以从指定时间点开始转换任务，-ss后的时间单位为秒 </span></span><br><span class="line"><span class="ruby">-title string 设置标题（比如PSP中显示影片的标题） </span></span><br><span class="line"><span class="ruby">-author string 设置作者 </span></span><br><span class="line"><span class="ruby">-r fps 设置帧频 缺省<span class="number">25</span> </span></span><br><span class="line"><span class="ruby">-s size 设置帧大小 格式为W*H 缺省<span class="number">160</span>*<span class="number">128</span>.也可以直接使用简写</span></span><br><span class="line"><span class="ruby">-ab bitrate 设置音频码率 </span></span><br><span class="line"><span class="ruby">-ar freq 设置音频采样率</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="ffmepg常用的方法"><a href="#ffmepg常用的方法" class="headerlink" title="ffmepg常用的方法"></a>ffmepg常用的方法</h2><h3 id="1-提取音频"><a href="#1-提取音频" class="headerlink" title="1.提取音频"></a>1.提取音频</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ffmpeg</span> <span class="selector-tag">-i</span> <span class="selector-tag">test</span><span class="selector-class">.mp4</span> <span class="selector-tag">-acodec</span> <span class="selector-tag">copy</span> <span class="selector-tag">-vn</span> <span class="selector-tag">output</span><span class="selector-class">.aac</span> </span><br><span class="line"></span><br><span class="line"># 上面的命令，默认<span class="selector-tag">mp4</span>的<span class="selector-tag">audio</span> <span class="selector-tag">codec</span>是<span class="selector-tag">aac</span>,如果不是，可以都转为最常见的<span class="selector-tag">aac</span>。 </span><br><span class="line"><span class="selector-tag">ffmpeg</span> <span class="selector-tag">-i</span> <span class="selector-tag">test</span><span class="selector-class">.mp4</span> <span class="selector-tag">-acodec</span> <span class="selector-tag">aac</span> <span class="selector-tag">-vn</span> <span class="selector-tag">output</span><span class="selector-class">.aac</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-视频剪切"><a href="#2-视频剪切" class="headerlink" title="2.视频剪切"></a>2.视频剪切</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 下面的命令，可以从时间为00<span class="selector-pseudo">:00</span><span class="selector-pseudo">:15</span>开始，截取5秒钟的视频。 </span><br><span class="line"><span class="selector-tag">ffmpeg</span> <span class="selector-tag">-ss</span> 00<span class="selector-pseudo">:00</span><span class="selector-pseudo">:15</span> <span class="selector-tag">-t</span> 00<span class="selector-pseudo">:00</span><span class="selector-pseudo">:05</span> <span class="selector-tag">-i</span> <span class="selector-tag">input</span><span class="selector-class">.mp4</span> <span class="selector-tag">-vcodec</span> <span class="selector-tag">copy</span> <span class="selector-tag">-acodec</span> <span class="selector-tag">copy</span> <span class="selector-tag">output</span><span class="selector-class">.mp4</span> </span><br><span class="line"># <span class="selector-tag">-ss</span>表示开始切割的时间，<span class="selector-tag">-t</span>表示要切多少。上面就是从15秒开始，切5秒钟出来。</span><br></pre></td></tr></table></figure>
+<h3 id="3-码率控制"><a href="#3-码率控制" class="headerlink" title="3.码率控制"></a>3.码率控制</h3><p>码率控制对于在线视频比较重要。因为在线视频需要考虑其能提供的带宽。</p>
+<p>那么，什么是码率？很简单： </p>
+<blockquote>
+<p>bitrate = file size / duration<br>比如一个文件20.8M，时长1分钟，那么，码率就是：<br>biterate = 20.8M bit/60s = 20.8<em>1024</em>1024*8 bit/60s= 2831Kbps<br>一般音频的码率只有固定几种，比如是128Kbps，<br>那么，video的就是<br>video biterate = 2831Kbps -128Kbps = 2703Kbps</p>
+</blockquote>
+<p><strong>那么ffmpeg如何控制码率？</strong></p>
+<p>ffmpg控制码率有3种选择，<code>-minrate -b:v -maxrate</code><br><code>-b:v</code>主要是控制平均码率。<br>比如一个视频源的码率太高了，有10Mbps，文件太大，想把文件弄小一点，但是又不破坏分辨率。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -<span class="selector-tag">i</span> <span class="selector-tag">input</span><span class="selector-class">.mp4</span> -<span class="selector-tag">b</span>:v <span class="number">2000</span>k output.mp4</span><br></pre></td></tr></table></figure></p>
+<p>上面把码率从原码率转成2Mbps码率，这样其实也间接让文件变小了。目测接近一半。<br>不过，ffmpeg官方wiki比较建议，设置b:v时，同时加上 <code>-bufsize</code>。 </p>
+<p><code>-bufsize</code> 用于设置码率控制缓冲器的大小，设置的好处是，让整体的码率更趋近于希望的值，减少波动。（简单来说，比如1 2的平均值是1.5， 1.49 1.51 也是1.5, 当然是第二种比较好）<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -<span class="selector-tag">i</span> <span class="selector-tag">input</span><span class="selector-class">.mp4</span> -<span class="selector-tag">b</span>:v <span class="number">2000</span>k -bufsize <span class="number">2000</span>k output.mp4</span><br></pre></td></tr></table></figure></p>
+<p><code>-minrate</code> 就简单了，在线视频有时候，希望码率波动，不要超过一个阈值，可以设置maxrate。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -<span class="selector-tag">i</span> <span class="selector-tag">input</span><span class="selector-class">.mp4</span> -<span class="selector-tag">b</span>:v <span class="number">2000</span>k -bufsize <span class="number">2000</span>k -maxrate <span class="number">2500</span>k output.mp4</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-视频编码格式转换"><a href="#4-视频编码格式转换" class="headerlink" title="4.视频编码格式转换"></a>4.视频编码格式转换</h3><p>比如一个视频的编码是MPEG4，想用H264编码，咋办？<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ffmpeg</span> <span class="selector-tag">-i</span> <span class="selector-tag">input</span><span class="selector-class">.mp4</span> <span class="selector-tag">-vcodec</span> <span class="selector-tag">h264</span> <span class="selector-tag">output</span><span class="selector-class">.mp4</span> </span><br><span class="line"># 相反也一样 </span><br><span class="line"><span class="selector-tag">ffmpeg</span> <span class="selector-tag">-i</span> <span class="selector-tag">input</span><span class="selector-class">.mp4</span> <span class="selector-tag">-vcodec</span> <span class="selector-tag">mpeg4</span> <span class="selector-tag">output</span><span class="selector-class">.mp4</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="5-视频压缩"><a href="#5-视频压缩" class="headerlink" title="5.视频压缩"></a>5.视频压缩</h3><p>将输入的1920x1080缩小到960x540输出:<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -vf <span class="built_in">scale</span>=<span class="number">960</span>:<span class="number">540</span> <span class="keyword">output</span>.mp4 </span><br><span class="line"><span class="meta"># ps: 如果540不写，写成-1，即scale=960:-1, 那也是可以的，ffmpeg会通知缩放滤镜在输出时保持原始的宽高比。</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="6-为视频添加logo"><a href="#6-为视频添加logo" class="headerlink" title="6.为视频添加logo"></a>6.为视频添加logo</h3><p>想要贴到一个视频上，那可以用如下命令：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ffmpeg -<span class="selector-tag">i</span> <span class="selector-tag">input</span><span class="selector-class">.mp4</span> -<span class="selector-tag">i</span> iQIYI_logo<span class="selector-class">.png</span> -filter_complex overlay output.mp4</span><br></pre></td></tr></table></figure></p>
+<p>结果如下所示：<br><img src="/archives/19984/001.jpg" alt="001"></p>
+<p>要贴到其他地方？看下面：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">右上角： </span><br><span class="line">./ffmpeg -<span class="selector-tag">i</span> <span class="selector-tag">input</span><span class="selector-class">.mp4</span> -<span class="selector-tag">i</span> logo<span class="selector-class">.png</span> -filter_complex overlay=W-w output<span class="selector-class">.mp4</span> </span><br><span class="line">左下角： </span><br><span class="line">./ffmpeg -<span class="selector-tag">i</span> <span class="selector-tag">input</span><span class="selector-class">.mp4</span> -<span class="selector-tag">i</span> logo<span class="selector-class">.png</span> -filter_complex overlay=<span class="number">0</span>:H-h output<span class="selector-class">.mp4</span> </span><br><span class="line">右下角： </span><br><span class="line">./ffmpeg -<span class="selector-tag">i</span> <span class="selector-tag">input</span><span class="selector-class">.mp4</span> -<span class="selector-tag">i</span> logo<span class="selector-class">.png</span> -filter_complex overlay=W-w:H-h output.mp4</span><br></pre></td></tr></table></figure></p>
+<h3 id="7-去掉视频的logo"><a href="#7-去掉视频的logo" class="headerlink" title="7.去掉视频的logo"></a>7.去掉视频的logo</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">语法：</span><br><span class="line">-vf delogo=<span class="string">x:</span><span class="string">y:</span><span class="string">w:</span>h[:t[:show]] </span><br><span class="line"><span class="string">x:</span>y 离左上角的坐标 </span><br><span class="line"><span class="string">w:</span>h logo的宽和高 </span><br><span class="line"><span class="string">t:</span> 矩形边缘的厚度默认值<span class="number">4</span> </span><br><span class="line">show：若设置为<span class="number">1</span>有一个绿色的矩形，默认值<span class="number">0</span>。</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -<span class="selector-tag">i</span> <span class="selector-tag">input</span><span class="selector-class">.mp4</span> -vf delogo=<span class="number">0</span>:<span class="number">0</span>:<span class="number">220</span>:<span class="number">90</span>:<span class="number">100</span>:<span class="number">1</span> output.mp4</span><br></pre></td></tr></table></figure>
+<p>结果如下所示：<br><img src="/archives/19984/002.jpg" alt="002"></p>
+<h3 id="8-截取视频图像"><a href="#8-截取视频图像" class="headerlink" title="8.截取视频图像"></a>8.截取视频图像</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ffmpeg</span> <span class="selector-tag">-i</span> <span class="selector-tag">input</span><span class="selector-class">.mp4</span> <span class="selector-tag">-r</span> 1 <span class="selector-tag">-q</span><span class="selector-pseudo">:v</span> 2 <span class="selector-tag">-f</span> <span class="selector-tag">image2</span> <span class="selector-tag">pic-</span>%03<span class="selector-tag">d</span><span class="selector-class">.jpeg</span> </span><br><span class="line"># <span class="selector-tag">-r</span> 表示每一秒几帧 </span><br><span class="line"># <span class="selector-tag">-q</span><span class="selector-pseudo">:v</span>表示存储<span class="selector-tag">jpeg</span>的图像质量，一般2是高质量。</span><br></pre></td></tr></table></figure>
+<p>如此，ffmpeg会把input.mp4，每隔一秒，存一张图片下来。假设有60s，那会有60张。</p>
+<p>可以设置开始的时间，和你想要截取的时间。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ffmpeg</span> <span class="selector-tag">-i</span> <span class="selector-tag">input</span><span class="selector-class">.mp4</span> <span class="selector-tag">-ss</span> 00<span class="selector-pseudo">:00</span><span class="selector-pseudo">:20</span> <span class="selector-tag">-t</span> 10 <span class="selector-tag">-r</span> 1 <span class="selector-tag">-q</span><span class="selector-pseudo">:v</span> 2 <span class="selector-tag">-f</span> <span class="selector-tag">image2</span> <span class="selector-tag">pic-</span>%03<span class="selector-tag">d</span><span class="selector-class">.jpeg</span> </span><br><span class="line"># <span class="selector-tag">-ss</span> 表示开始时间 </span><br><span class="line"># <span class="selector-tag">-t</span> 表示共要多少时间。</span><br></pre></td></tr></table></figure></p>
+<p>如此，ffmpeg会从input.mp4的第20s时间开始，往下10s，即20~30s这10秒钟之间，每隔1s就抓一帧，总共会抓10帧。</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="javascript:;">sweida</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/archives/61656.html" class="next-post btn btn-default" title='python环境搭建之OpenCV'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">python环境搭建之OpenCV</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!-- <script type="text/javascript" src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        owner:"sweida",
+        repo:"sweida.github.io",
+        oauth: {
+          client_id:"9a486808f778b7b4eac8",
+          client_secret:"78226662fa23e0991de5a220a2e2a233f43cae87"
+        },
+        perPage:"10",
+    });
+    gitment.render('comments');
+</script>
+
+<style media="screen">
+.gitment-footer-container{
+  display: none;
+}
+.gitment-comment-main::before {
+  border-right-color: #7EA4CA;
+}
+/* .gitment-comment-main,
+.gitment-editor-main,
+.gitment-editor-header {
+  border: 1px solid #e67e22;
+}
+.gitment-editor-tab.gitment-selected{
+  border: none;
+}
+.gitment-editor-main::before, .gitment-comment-main::before {
+  border-right-color: #e67e22;
+} */
+
+</style>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#访问项目的端口号，成功进入，但是除了根’-‘目录，其它目录都是404"><span class="toc-text">访问项目的端口号，成功进入，但是除了根’/‘目录，其它目录都是404</span></a></li></ol>
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--<a id="toc-btn">
+    <i class="fa fa-bars"></i>
+</a>-->
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>&copy; 2017-2018 <a href="//github.com/sweida" class="copyright-links" target="_blank" rel="nofollow">sweida</a> 强力驱动
+                </span> |
+                <span>
+                  备案：不存在的！
+                    <!-- 由 <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a> 强力驱动 -->
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>

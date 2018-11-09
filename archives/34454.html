@@ -1,0 +1,336 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Start Here">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://sweida.github.io">
+    <!--SEO-->
+
+<meta name="description" content="个人技术学习分享博客，前端技术分享"/>
+
+
+
+<meta name="keywords" content="技术博客,前端技术"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>laravel的CSRF保护 | Start Here</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Start Here" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.png">
+
+    
+
+
+    <link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background:url(../../img/banner.jpg) 0 -470px;background-size:100%;"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='施伟达'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 人生若只如初见 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/前端"><i class="fa "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/后端"><i class="fa "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工具"><i class="fa "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/myGitbook"><i class="fa "></i>Gitbook</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/vip"><i class="fa "></i>vip视频</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="laravel的CSRF保护">
+            
+	            laravel的CSRF保护
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/后端">
+            后端
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/PHP" title='PHP'>
+                        PHP
+                    </a>
+                
+                    <a href="/tags/laravel" title='laravel'>
+                        laravel
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/10/17</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>跨站请求伪造（CSRF）是一种通过伪装授权用户的请求来攻击授信网站的恶意漏洞。<br>Laravel 默认情况下，为了安全考虑，Laravel 期望所有路由都是「只读」操作的（对应请求方式是 GET、HEAD、OPTIONS），如果路由执行的是「写入」操作（对应请求方式是 POST、PUT、PATCH、DELETE），则需要传入一个隐藏的 Token 字段<code>_token</code>以避免[跨站请求伪造攻击]（CSRF）。如果请求方式是 DELETE，但是并没有传递 <code>_token</code> 字段，所以会出现异常。</p>
+<p>避免跨站请求伪造攻击的措施就是对写入操作采用非 GET 方式请求，同时在请求数据中添加校验 Token 字段，Laravel 也是这么做的，这个 Token 值会在渲染表单页面时通过 Session 生成，然后传入页面，在每次提交表单时带上这个 Token 值即可实现安全写入，因为第三方站点是不可能拿到这个 Token 值的，所以由第三方站点提交的请求会被拒绝，从而避免 CSRF 攻击。</p>
+<p><code>X-CSRF-Token</code><br>除了将 CSRF 令牌作为 POST 参数进行验证外，还可以通过设置 X-CSRF-Token 请求头来实现验证，VerifyCsrfToken 中间件会检查 X-CSRF-TOKEN 请求头。实现方式如下，首先创建一个 meta 标签并将令牌保存到该 meta 标签：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="attribute">name</span>=<span class="string">"csrf-token"</span> <span class="attribute">content</span>=<span class="string">"&#123;&#123; csrf_token() &#125;&#125;"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="禁止CSRF功能"><a href="#禁止CSRF功能" class="headerlink" title="禁止CSRF功能"></a>禁止CSRF功能</h3><p>Laravel默认是开启了，需要关闭此功能有两种方法：</p>
+<p><strong> 方法一 </strong><br>打开文件：<code>app\Http\Kernel.php</code><br>把这行注释掉：<br><figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">'App<span class="symbol">\H</span>ttp<span class="symbol">\M</span>iddleware<span class="symbol">\V</span>erifyCsrfToken'</span><br></pre></td></tr></table></figure></p>
+<p><strong> 方法二 </strong><br>打开文件：<code>app\Http\Middleware\VerifyCsrfToken.php</code><br>修改为：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入这个</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Http</span>\<span class="title">Middleware</span>\<span class="title">VerifyCsrfToken</span> <span class="title">as</span> <span class="title">BaseVerifier</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VerifyCsrfToken</span> <span class="keyword">extends</span> <span class="title">BaseVerifier</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Handle an incoming request.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Closure  $next</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">     <span class="comment">// 加入这个方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">($request, Closure $next)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 使用CSRF</span></span><br><span class="line">        <span class="comment">//return parent::handle($request, $next);</span></span><br><span class="line">        <span class="comment">// 禁用CSRF</span></span><br><span class="line">        <span class="keyword">return</span> $next($request);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 也可以对指定的表单提交方式使用CSRF</span></span><br><span class="line">    <span class="comment">// 只对GET的方式提交使用CSRF，对POST方式提交表单禁用CSRF</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">($request, Closure $next)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// Add this:</span></span><br><span class="line">        <span class="keyword">if</span>($request-&gt;method() == <span class="string">'POST'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> $next($request);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ($request-&gt;method() == <span class="string">'GET'</span> || <span class="keyword">$this</span>-&gt;tokensMatch($request))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> $next($request);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> TokenMismatchException;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用-CSRF"><a href="#使用-CSRF" class="headerlink" title="使用 CSRF"></a>使用 <code>CSRF</code></h3><p>方法一：HTML的代码中加入：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"_token"</span> <span class="attr">value</span>=<span class="string">"&#123;&#123; csrf_token() &#125;&#125;"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 或者可以使用 Blade 指令 @csrf --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">action</span>=<span class="string">"/profile"</span>&gt;</span></span><br><span class="line">    @csrf</span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>另一种是使用cookie方式。<br>使用cookie方式，需要把app\Http\Middleware\VerifyCsrfToken.php修改为：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Http</span>\<span class="title">Middleware</span>\<span class="title">VerifyCsrfToken</span> <span class="title">as</span> <span class="title">BaseVerifier</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VerifyCsrfToken</span> <span class="keyword">extends</span> <span class="title">BaseVerifier</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Handle an incoming request.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Closure  $next</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">($request, Closure $next)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">parent</span>::addCookieToResponse($request, $next($request));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="javascript:;">sweida</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/archives/37793.html" class="pre-post btn btn-default" title='laravel模型工厂和数据填充'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">laravel模型工厂和数据填充</span>
+        </a>
+    
+    
+        <a href="/archives/59853.html" class="next-post btn btn-default" title='laravel服务器部署'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">laravel服务器部署</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!-- <script type="text/javascript" src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        owner:"sweida",
+        repo:"sweida.github.io",
+        oauth: {
+          client_id:"9a486808f778b7b4eac8",
+          client_secret:"78226662fa23e0991de5a220a2e2a233f43cae87"
+        },
+        perPage:"10",
+    });
+    gitment.render('comments');
+</script>
+
+<style media="screen">
+.gitment-footer-container{
+  display: none;
+}
+.gitment-comment-main::before {
+  border-right-color: #7EA4CA;
+}
+/* .gitment-comment-main,
+.gitment-editor-main,
+.gitment-editor-header {
+  border: 1px solid #e67e22;
+}
+.gitment-editor-tab.gitment-selected{
+  border: none;
+}
+.gitment-editor-main::before, .gitment-comment-main::before {
+  border-right-color: #e67e22;
+} */
+
+</style>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#访问项目的端口号，成功进入，但是除了根’-‘目录，其它目录都是404"><span class="toc-text">访问项目的端口号，成功进入，但是除了根’/‘目录，其它目录都是404</span></a></li></ol>
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--<a id="toc-btn">
+    <i class="fa fa-bars"></i>
+</a>-->
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>&copy; 2017-2018 <a href="//github.com/sweida" class="copyright-links" target="_blank" rel="nofollow">sweida</a> 强力驱动
+                </span> |
+                <span>
+                  备案：不存在的！
+                    <!-- 由 <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a> 强力驱动 -->
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>
